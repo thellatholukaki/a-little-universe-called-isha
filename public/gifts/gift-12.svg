@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="envGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF3E0" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#D7CCC8" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#D7CCC8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="parchment" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF8"/>
+      <stop offset="60%" stop-color="#F5EBD7"/>
+      <stop offset="100%" stop-color="#DEC9A6"/>
+    </linearGradient>
+    <linearGradient id="redWax" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D9384E"/>
+      <stop offset="60%" stop-color="#A8182B"/>
+      <stop offset="100%" stop-color="#610713"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes envFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes sealGleam { 0%, 100% { filter: drop-shadow(0 2px 6px rgba(168,24,43,0.5)); } 50% { filter: drop-shadow(0 4px 12px rgba(217,56,78,0.9)); } }
+    .float-env { animation: envFloat 3.8s ease-in-out infinite; }
+    .gleam-seal { animation: sealGleam 2.5s ease-in-out infinite; }
+  </style>
+  <circle cx="100" cy="100" r="75" fill="url(#envGlow)" />
+  <g class="float-env">
+    <!-- Envelope Base -->
+    <rect x="40" y="60" width="120" height="85" rx="8" fill="url(#parchment)" stroke="#C4A982" stroke-width="1.8" filter="drop-shadow(0 8px 16px rgba(100,75,45,0.25))"/>
+    <!-- Fold Lines -->
+    <polygon points="40,145 100,98 160,145" fill="#EADBC3" stroke="#D1B892" stroke-width="1"/>
+    <line x1="40" y1="60" x2="90" y2="102" stroke="#D1B892" stroke-width="1.2"/>
+    <line x1="160" y1="60" x2="110" y2="102" stroke="#D1B892" stroke-width="1.2"/>
+    <!-- Flap Open Edge -->
+    <polygon points="40,60 100,105 160,60" fill="url(#parchment)" stroke="#C4A982" stroke-width="1.5"/>
+    <!-- Crimson Wax Seal with Crown Stamp -->
+    <g class="gleam-seal">
+      <circle cx="100" cy="105" r="16" fill="url(#redWax)" stroke="#FFB4BE" stroke-width="1"/>
+      <circle cx="100" cy="105" r="12" fill="#800F1F"/>
+      <!-- Crown Icon on Seal -->
+      <path d="M92 108 L94 100 L97 104 L100 98 L103 104 L106 100 L108 108 Z" fill="#FFDF80"/>
+      <rect x="92" y="109" width="16" height="2" rx="1" fill="#FFDF80"/>
+    </g>
+  </g>
+</svg>

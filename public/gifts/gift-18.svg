@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="quartzGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE4E8" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#F8BBD0" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#F8BBD0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="quartzFacet1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#F48FB1"/>
+      <stop offset="100%" stop-color="#C2185B"/>
+    </linearGradient>
+    <linearGradient id="quartzFacet2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD1DC"/>
+      <stop offset="60%" stop-color="#E91E63"/>
+      <stop offset="100%" stop-color="#880E4F"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes gemPulse { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 14px rgba(244,143,177,0.7)); } 50% { transform: scale(1.05); filter: drop-shadow(0 0 24px rgba(233,30,99,0.9)); } }
+    .gem { transform-origin: 100px 95px; animation: gemPulse 3.5s ease-in-out infinite; }
+  </style>
+  <circle cx="100" cy="95" r="75" fill="url(#quartzGlow)" />
+  <g class="gem">
+    <!-- Faceted Gem Heart -->
+    <polygon points="100,55 70,42 48,65 52,95 100,145" fill="url(#quartzFacet1)"/>
+    <polygon points="100,55 130,42 152,65 148,95 100,145" fill="url(#quartzFacet2)"/>
+    <!-- Facet Inner Polygons -->
+    <polygon points="100,55 80,72 100,115" fill="#FFF0F5" opacity="0.6"/>
+    <polygon points="100,55 120,72 100,115" fill="#F06292" opacity="0.4"/>
+    <polygon points="70,42 48,65 80,72" fill="#FFFFFF" opacity="0.45"/>
+    <polygon points="130,42 152,65 120,72" fill="#AD1457" opacity="0.3"/>
+    <!-- Highlight Sparkle -->
+    <circle cx="75" cy="58" r="3.5" fill="#FFF"/>
+  </g>
+</svg>

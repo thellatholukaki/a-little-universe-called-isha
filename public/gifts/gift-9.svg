@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="albumGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF3E3" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#E8D4BE" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#B89675" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="albumLeather" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8C3A44"/>
+      <stop offset="60%" stop-color="#591C24"/>
+      <stop offset="100%" stop-color="#380F14"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes albumFloat { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-5px) rotate(1deg); } }
+    .album-box { transform-origin: 100px 100px; animation: albumFloat 4s ease-in-out infinite; }
+  </style>
+  <circle cx="100" cy="95" r="75" fill="url(#albumGlow)" />
+  <g class="album-box">
+    <!-- Back Cover Shadow -->
+    <rect x="52" y="48" width="100" height="114" rx="6" fill="#2E0E12" transform="rotate(-3 100 100)"/>
+    <!-- Pages Stack -->
+    <rect x="50" y="47" width="98" height="112" rx="5" fill="#FFF9F0" stroke="#E2D4BF" stroke-width="1.5" transform="rotate(-1 100 100)"/>
+    <line x1="145" y1="52" x2="145" y2="155" stroke="#D6C2AF" stroke-width="2"/>
+    <!-- Front Leather Cover -->
+    <rect x="46" y="45" width="98" height="112" rx="6" fill="url(#albumLeather)" stroke="#C59B27" stroke-width="2" filter="drop-shadow(0 8px 16px rgba(56,15,20,0.35))"/>
+    <!-- Gold Embossed Ornaments -->
+    <rect x="52" y="51" width="86" height="100" rx="3" fill="none" stroke="#E5B942" stroke-width="1.2" stroke-dasharray="4 2"/>
+    <circle cx="95" cy="92" r="18" fill="#591C24" stroke="#E5B942" stroke-width="1.5"/>
+    <path d="M95 82 C95 78, 86 78, 86 85 C86 92, 95 98, 95 100 C95 98, 104 92, 104 85 C104 78, 95 78, 95 82 Z" fill="#FFE085"/>
+    <!-- Album Title Text -->
+    <text x="95" y="125" font-family="serif" font-size="8" font-style="italic" fill="#FFDF80" text-anchor="middle" letter-spacing="1">MEMORIES</text>
+    <!-- Silk Bookmark Ribbon -->
+    <path d="M85 45 Q90 120 88 170 Q95 165 102 170 Q100 120 95 45 Z" fill="#E5B942" opacity="0.95" filter="drop-shadow(2px 3px 4px rgba(0,0,0,0.3))"/>
+  </g>
+</svg>

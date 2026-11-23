@@ -17,6 +17,7 @@ export interface CelebrationGift {
   ribbonColor: string;
   pattern: string;
   iconName: string;
+  imagePath?: string;
   isSpecialFinal?: boolean;
 }
 

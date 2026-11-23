@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="braceletGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FAD4D8" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#D9A6A0" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#D9A6A0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="roseGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0EE"/>
+      <stop offset="50%" stop-color="#EAA69D"/>
+      <stop offset="100%" stop-color="#B36B63"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes charmSway { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+    .charm-group { transform-origin: 100px 125px; animation: charmSway 3s ease-in-out infinite; }
+  </style>
+  <circle cx="100" cy="95" r="75" fill="url(#braceletGlow)" />
+  <!-- Braided Cord Oval -->
+  <ellipse cx="100" cy="95" rx="60" ry="40" fill="none" stroke="#D9A6A0" stroke-width="6" stroke-dasharray="8 3" opacity="0.9"/>
+  <ellipse cx="100" cy="95" rx="57" ry="37" fill="none" stroke="#A9B7A0" stroke-width="4" stroke-dasharray="6 4" opacity="0.85"/>
+  <ellipse cx="100" cy="95" rx="63" ry="43" fill="none" stroke="#F4D06F" stroke-width="3" stroke-dasharray="10 4" opacity="0.75"/>
+  <!-- Gold Beads on Cord -->
+  <circle cx="55" cy="85" r="5" fill="url(#roseGold)"/>
+  <circle cx="145" cy="85" r="5" fill="url(#roseGold)"/>
+  <circle cx="100" cy="55" r="5" fill="url(#roseGold)"/>
+  <!-- Dangling Rose Gold Heart Charm -->
+  <g class="charm-group">
+    <circle cx="100" cy="135" r="3" fill="url(#roseGold)"/>
+    <line x1="100" y1="135" x2="100" y2="148" stroke="url(#roseGold)" stroke-width="2.5"/>
+    <g transform="translate(100, 158) scale(0.9)">
+      <path d="M0 -6 C0 -14, -14 -14, -14 0 C-14 10, 0 18, 0 20 C0 18, 14 10, 14 0 C14 -14, 0 -14, 0 -6 Z" fill="url(#roseGold)" stroke="#FFF" stroke-width="1.2" filter="drop-shadow(0 4px 8px rgba(179,107,99,0.4))"/>
+      <circle cx="0" cy="4" r="2.5" fill="#FFF" opacity="0.9"/>
+    </g>
+  </g>
+</svg>

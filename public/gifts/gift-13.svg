@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="musicGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E1D5EA" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#A584BD" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#A584BD" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="walnutWood" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#795548"/>
+      <stop offset="60%" stop-color="#4E342E"/>
+      <stop offset="100%" stop-color="#2D1A15"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes noteFloat1 { 0% { transform: translateY(0) scale(0.8); opacity: 0; } 50% { opacity: 0.9; } 100% { transform: translateY(-35px) translateX(-15px) scale(1.1); opacity: 0; } }
+    @keyframes noteFloat2 { 0% { transform: translateY(0) scale(0.8); opacity: 0; } 50% { opacity: 0.9; } 100% { transform: translateY(-40px) translateX(18px) scale(1.1); opacity: 0; } }
+    .note1 { animation: noteFloat1 3s ease-in infinite; }
+    .note2 { animation: noteFloat2 3.6s ease-in infinite 1.2s; }
+  </style>
+  <circle cx="100" cy="100" r="75" fill="url(#musicGlow)" />
+  <!-- Musical Notes Drifting -->
+  <g transform="translate(85, 55)" class="note1">
+    <text font-size="16" fill="#8E24AA">♪</text>
+  </g>
+  <g transform="translate(115, 60)" class="note2">
+    <text font-size="20" fill="#E5A93C">♫</text>
+  </g>
+  <!-- Music Box Base -->
+  <rect x="50" y="85" width="100" height="65" rx="8" fill="url(#walnutWood)" stroke="#D4AF37" stroke-width="2" filter="drop-shadow(0 10px 18px rgba(45,26,21,0.4))"/>
+  <!-- Box Lid Opened at Angle -->
+  <polygon points="46,85 100,55 154,85 100,92" fill="#5D4037" stroke="#D4AF37" stroke-width="1.5"/>
+  <!-- Gold Crank Handle on Side -->
+  <path d="M150 110 L168 110 L168 122 L174 122" stroke="#E5B942" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="174" cy="122" r="3.5" fill="#FFE57F"/>
+  <!-- Internal Brass Cylinder (Spindle) -->
+  <rect x="75" y="76" width="50" height="12" rx="3" fill="#E5B942"/>
+  <line x1="85" y1="76" x2="85" y2="88" stroke="#FFF" stroke-width="1"/>
+  <line x1="95" y1="76" x2="95" y2="88" stroke="#FFF" stroke-width="1"/>
+  <line x1="105" y1="76" x2="105" y2="88" stroke="#FFF" stroke-width="1"/>
+  <line x1="115" y1="76" x2="115" y2="88" stroke="#FFF" stroke-width="1"/>
+</svg>

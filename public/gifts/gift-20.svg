@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF9C4" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#FFB74D" stop-opacity="0.5"/>
+      <stop offset="80%" stop-color="#FF7043" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FF7043" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldBrassSun" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="50%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes sunSpinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes prismRainbow { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+    .sun-rays { transform-origin: 100px 95px; animation: sunSpinSlow 30s linear infinite; }
+    .prism { animation: prismRainbow 3s ease-in-out infinite; }
+  </style>
+  <circle cx="100" cy="95" r="80" fill="url(#sunGlow)" />
+  <!-- Hanging chain -->
+  <line x1="100" y1="20" x2="100" y2="55" stroke="#FFC107" stroke-width="2" stroke-dasharray="3 3"/>
+  <!-- Rotating Sun Rays -->
+  <g class="sun-rays" stroke="url(#goldBrassSun)" stroke-width="2.5" stroke-linecap="round">
+    <line x1="100" y1="52" x2="100" y2="40"/>
+    <line x1="100" y1="138" x2="100" y2="150"/>
+    <line x1="57" y1="95" x2="45" y2="95"/>
+    <line x1="143" y1="95" x2="155" y2="95"/>
+    <line x1="70" y1="65" x2="60" y2="55"/>
+    <line x1="130" y1="125" x2="140" y2="135"/>
+    <line x1="70" y1="125" x2="60" y2="135"/>
+    <line x1="130" y1="65" x2="140" y2="55"/>
+  </g>
+  <!-- Central Prismatic Crystal Beveled Sun -->
+  <circle cx="100" cy="95" r="32" fill="#FFFDF0" stroke="url(#goldBrassSun)" stroke-width="3" filter="drop-shadow(0 0 16px rgba(255,183,77,0.8))"/>
+  <!-- Faceted Prismatic Shards -->
+  <polygon points="100,68 115,85 100,95 85,85" fill="#FFE082" opacity="0.8"/>
+  <polygon points="100,122 115,105 100,95 85,105" fill="#FFB74D" opacity="0.8"/>
+  <polygon points="73,95 85,85 100,95 85,105" fill="#80DEEA" opacity="0.75"/>
+  <polygon points="127,95 115,85 100,95 115,105" fill="#CE93D8" opacity="0.75"/>
+  <!-- Center Glint -->
+  <circle cx="100" cy="95" r="5" fill="#FFF" filter="drop-shadow(0 0 5px #FFF)"/>
+</svg>

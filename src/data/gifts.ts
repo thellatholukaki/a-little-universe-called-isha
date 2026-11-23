@@ -2,7 +2,7 @@ import { CelebrationGift } from '../types';
 
 export const CELEBRATION_GIFTS: CelebrationGift[] = [
   {
-    id: 1,
+id: 1,
     giftName: 'A Bouquet of Velvet Roses',
     wish: 'A year filled with happiness.',
     reflection: 'Freshly blooming deep red and dusty pink roses, tied with satin ribbon. May every month bring you a fresh reason to smile.',
@@ -10,10 +10,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#E5A8B2]',
     ribbonColor: 'bg-[#F2D0A4]',
     pattern: 'bg-[radial-gradient(#F2D0A4_1px,transparent_1px)] [background-size:12px_12px]',
-    iconName: 'flower'
+    iconName: 'flower',
+    imagePath: './gifts/gift-1.svg'
   },
   {
-    id: 2,
+id: 2,
     giftName: 'An Artisan Chocolate Box',
     wish: 'Countless reasons to smile.',
     reflection: 'Handcrafted dark chocolate truffles infused with hazelnut and sea salt. Because life is always better with something sweet.',
@@ -21,10 +22,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#C49B76]',
     ribbonColor: 'bg-[#EAD5B8]',
     pattern: 'bg-[radial-gradient(#C49B76_1px,transparent_1px)] [background-size:14px_14px]',
-    iconName: 'gift'
+    iconName: 'gift',
+    imagePath: './gifts/gift-2.svg'
   },
   {
-    id: 3,
+id: 3,
     giftName: 'A Crystal Butterfly Ornament',
     wish: 'Beautiful new experiences.',
     reflection: 'A delicate glass butterfly that catches sunlight and scatters rainbows across your room. May you fly into thrilling new chapters.',
@@ -32,10 +34,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#D9CBE8]',
     ribbonColor: 'bg-[#FFFFFF]',
     pattern: 'bg-[radial-gradient(#FFFFFF_1px,transparent_1px)] [background-size:10px_10px]',
-    iconName: 'sparkles'
+    iconName: 'sparkles',
+    imagePath: './gifts/gift-3.svg'
   },
   {
-    id: 4,
+id: 4,
     giftName: 'A Glowing Star Keepsake',
     wish: 'Courage to chase every dream.',
     reflection: 'A polished brass star inscribed with quiet courage. Whenever doubt whispers, remember how brilliant you are.',
@@ -43,10 +46,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#F4D06F]',
     ribbonColor: 'bg-[#F4D06F]',
     pattern: 'bg-[radial-gradient(#F4D06F_1.5px,transparent_1.5px)] [background-size:16px_16px]',
-    iconName: 'star'
+    iconName: 'star',
+    imagePath: './gifts/gift-4.svg'
   },
   {
-    id: 5,
+id: 5,
     giftName: 'A Golden Milestone Trophy',
     wish: 'Success in everything you pursue.',
     reflection: 'Awarded to Isha for being extraordinarily wonderful. May every effort and project you touch turn into proud success.',
@@ -54,10 +58,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#FCECB5]',
     ribbonColor: 'bg-[#252641]',
     pattern: 'bg-[radial-gradient(#FCECB5_1px,transparent_1px)] [background-size:12px_12px]',
-    iconName: 'trophy'
+    iconName: 'trophy',
+    imagePath: './gifts/gift-5.svg'
   },
   {
-    id: 6,
+id: 6,
     giftName: 'A Pearlescent Moon Lamp',
     wish: 'Peace on difficult days.',
     reflection: 'A soft luminous moon globe that turns night into a soothing sanctuary. May you always find restful calm within.',
@@ -65,10 +70,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#D5DEE8]',
     ribbonColor: 'bg-[#E1EAF4]',
     pattern: 'bg-[radial-gradient(#E1EAF4_1px,transparent_1px)] [background-size:14px_14px]',
-    iconName: 'moon'
+    iconName: 'moon',
+    imagePath: './gifts/gift-6.svg'
   },
   {
-    id: 7,
+id: 7,
     giftName: 'A Woven Friendship Bracelet',
     wish: 'People who genuinely appreciate you.',
     reflection: 'Handmade rose gold and sage silk threads woven together. May you always be surrounded by people who see your true worth.',
@@ -76,10 +82,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#F8E3E1]',
     ribbonColor: 'bg-[#FFF9F0]',
     pattern: 'bg-[radial-gradient(#FFF9F0_1px,transparent_1px)] [background-size:10px_10px]',
-    iconName: 'heart'
+    iconName: 'heart',
+    imagePath: './gifts/gift-7.svg'
   },
   {
-    id: 8,
+id: 8,
     giftName: 'A Vintage Travel Box',
     wish: 'Unexpected little adventures.',
     reflection: 'A leather-trimmed keepsake box containing a vintage brass compass. May this year take you on spontaneous, scenic journeys.',
@@ -87,10 +94,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#D6C2AF]',
     ribbonColor: 'bg-[#A9B7A0]',
     pattern: 'bg-[radial-gradient(#D6C2AF_1px,transparent_1px)] [background-size:14px_14px]',
-    iconName: 'compass'
+    iconName: 'compass',
+    imagePath: './gifts/gift-8.svg'
   },
   {
-    id: 9,
+id: 9,
     giftName: 'A Golden Memory Album',
     wish: 'Wonderful memories.',
     reflection: 'Cloth-bound album with deckled pages ready to hold snapshots of all the hilarious, heartwarming moments ahead.',
@@ -98,10 +106,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#B89675]',
     ribbonColor: 'bg-[#9C414A]',
     pattern: 'bg-[radial-gradient(#B89675_1px,transparent_1px)] [background-size:12px_12px]',
-    iconName: 'book'
+    iconName: 'book',
+    imagePath: './gifts/gift-9.svg'
   },
   {
-    id: 10,
+id: 10,
     giftName: 'An Antique Gilded Mirror',
     wish: 'Confidence in yourself.',
     reflection: 'A beautiful ornate hand mirror. A daily reminder that the person looking back at you is capable of magic.',
@@ -109,10 +118,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#E4EAF2]',
     ribbonColor: 'bg-[#D9A6A0]',
     pattern: 'bg-[radial-gradient(#E4EAF2_1px,transparent_1px)] [background-size:10px_10px]',
-    iconName: 'sparkles'
+    iconName: 'sparkles',
+    imagePath: './gifts/gift-10.svg'
   },
   {
-    id: 11,
+id: 11,
     giftName: 'A Terracotta Wildflower Pot',
     wish: 'Strength during challenges.',
     reflection: 'A hand-painted planter with perennial blooms. Resilient, grounded, and blooming stronger with every changing season.',
@@ -120,10 +130,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#F2C0B1]',
     ribbonColor: 'bg-[#A9B7A0]',
     pattern: 'bg-[radial-gradient(#F2C0B1_1px,transparent_1px)] [background-size:14px_14px]',
-    iconName: 'flower'
+    iconName: 'flower',
+    imagePath: './gifts/gift-11.svg'
   },
   {
-    id: 12,
+id: 12,
     giftName: 'A Wax-Sealed Surprise Envelope',
     wish: 'Opportunities you never expected.',
     reflection: 'Heavy parchment stamped with a golden crown. Doors opening where you least expected them to, welcoming you inside.',
@@ -131,10 +142,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#8B3A44]',
     ribbonColor: 'bg-[#8B3A44]',
     pattern: 'bg-[radial-gradient(#8B3A44_1px,transparent_1px)] [background-size:12px_12px]',
-    iconName: 'mail'
+    iconName: 'mail',
+    imagePath: './gifts/gift-12.svg'
   },
   {
-    id: 13,
+id: 13,
     giftName: 'A Wooden Musical Box',
     wish: 'Moments of pure laughter.',
     reflection: 'Turn the tiny bronze key and hear a joyful melody. May you laugh until your cheeks hurt and your spirits soar.',
@@ -142,10 +154,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#CBB6DB]',
     ribbonColor: 'bg-[#F2D0A4]',
     pattern: 'bg-[radial-gradient(#CBB6DB_1px,transparent_1px)] [background-size:10px_10px]',
-    iconName: 'music'
+    iconName: 'music',
+    imagePath: './gifts/gift-13.svg'
   },
   {
-    id: 14,
+id: 14,
     giftName: 'A Miniature Rotating Globe',
     wish: 'New places to explore.',
     reflection: 'A desktop antique brass globe. Cozy coffee shops in faraway alleys, scenic mountains, and ocean air waiting for your footsteps.',
@@ -153,10 +166,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#B4DCE8]',
     ribbonColor: 'bg-[#C59B27]',
     pattern: 'bg-[radial-gradient(#B4DCE8_1px,transparent_1px)] [background-size:14px_14px]',
-    iconName: 'globe'
+    iconName: 'globe',
+    imagePath: './gifts/gift-14.svg'
   },
   {
-    id: 15,
+id: 15,
     giftName: 'A Pastel Friendship Bouquet',
     wish: 'Beautiful friendships.',
     reflection: 'Delicate hydrangeas, baby breath, and sweet peas. Bonds of honesty, comfort, and conversations that feel like home.',
@@ -164,10 +178,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#FFF0F2]',
     ribbonColor: 'bg-[#C9C0E8]',
     pattern: 'bg-[radial-gradient(#FFF0F2_1px,transparent_1px)] [background-size:12px_12px]',
-    iconName: 'flower'
+    iconName: 'flower',
+    imagePath: './gifts/gift-15.svg'
   },
   {
-    id: 16,
+id: 16,
     giftName: 'A Cosy Winter Blanket Box',
     wish: 'Time for everything you love.',
     reflection: 'Plush cashmere, spiced cinnamon tea, and an unhurried afternoon. Never let the busy world rob you of slow, cozy moments.',
@@ -175,10 +190,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#8F6A52]',
     ribbonColor: 'bg-[#5C3C26]',
     pattern: 'bg-[radial-gradient(#8F6A52_1px,transparent_1px)] [background-size:12px_12px]',
-    iconName: 'gift'
+    iconName: 'gift',
+    imagePath: './gifts/gift-16.svg'
   },
   {
-    id: 17,
+id: 17,
     giftName: 'A Glowing Starlight Dream Jar',
     wish: 'Dreams turning into reality.',
     reflection: 'A glass apothecary jar containing tiny bioluminescent fairy lights. The wishes you whisper to the night quietly taking shape.',
@@ -186,10 +202,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#A3C4F3]',
     ribbonColor: 'bg-[#FFD166]',
     pattern: 'bg-[radial-gradient(#FFD166_1.5px,transparent_1.5px)] [background-size:14px_14px]',
-    iconName: 'star'
+    iconName: 'star',
+    imagePath: './gifts/gift-17.svg'
   },
   {
-    id: 18,
+id: 18,
     giftName: 'A Rose Quartz Keepsake',
     wish: 'Kindness coming back to you.',
     reflection: 'Carved natural pink stone representing pure unconditional warmth. Every gentle smile you share returning to you tenfold.',
@@ -197,10 +214,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#FAD6DB]',
     ribbonColor: 'bg-[#FFF9F0]',
     pattern: 'bg-[radial-gradient(#FFF9F0_1px,transparent_1px)] [background-size:10px_10px]',
-    iconName: 'heart'
+    iconName: 'heart',
+    imagePath: './gifts/gift-18.svg'
   },
   {
-    id: 19,
+id: 19,
     giftName: 'A Festive Confetti Spark Box',
     wish: 'More reasons to celebrate.',
     reflection: 'Packed with metallic party poppers and celebratory streamers. Not just on your birthday, but for all your everyday victories.',
@@ -208,10 +226,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#FCD3CD]',
     ribbonColor: 'bg-[#FFD166]',
     pattern: 'bg-[radial-gradient(#FFD166_1.5px,transparent_1.5px)] [background-size:12px_12px]',
-    iconName: 'sparkles'
+    iconName: 'sparkles',
+    imagePath: './gifts/gift-19.svg'
   },
   {
-    id: 20,
+id: 20,
     giftName: 'A Sunrise Sun-Catcher Ornament',
     wish: 'Calm and peaceful mornings.',
     reflection: 'Prismatic crystal reflecting the dawn golden hour. Warm light across your bed, a slow sip of coffee, and zero hurry.',
@@ -219,10 +238,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#FDE2D2]',
     ribbonColor: 'bg-[#FFFDF9]',
     pattern: 'bg-[radial-gradient(#FFFDF9_1px,transparent_1px)] [background-size:12px_12px]',
-    iconName: 'sun'
+    iconName: 'sun',
+    imagePath: './gifts/gift-20.svg'
   },
   {
-    id: 21,
+id: 21,
     giftName: 'A Magical Mystery Box',
     wish: 'Magical little surprises.',
     reflection: 'A lacquered wooden box with an enigmatic bronze key. The sweetest moments in life are often the ones you never saw coming.',
@@ -230,10 +250,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#E2C7F7]',
     ribbonColor: 'bg-[#C59B27]',
     pattern: 'bg-[radial-gradient(#E2C7F7_1px,transparent_1px)] [background-size:14px_14px]',
-    iconName: 'sparkles'
+    iconName: 'sparkles',
+    imagePath: './gifts/gift-21.svg'
   },
   {
-    id: 22,
+id: 22,
     giftName: 'A Brilliant Gilded Star',
     wish: 'A year that exceeds your expectations.',
     reflection: 'Crafted from shimmering spun gold. May age 23 be the chapter that shatters your ceilings and gives you reasons to pinch yourself.',
@@ -241,10 +262,11 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     boxBorder: 'border-[#FFF0B8]',
     ribbonColor: 'bg-[#252641]',
     pattern: 'bg-[radial-gradient(#FFF0B8_1.5px,transparent_1.5px)] [background-size:12px_12px]',
-    iconName: 'star'
+    iconName: 'star',
+    imagePath: './gifts/gift-22.svg'
   },
   {
-    id: 23,
+id: 23,
     giftName: 'The 23rd Special Grand Surprise',
     wish: 'A beautiful chapter worth remembering.',
     reflection: 'Out of all these little surprises, this one comes with a little extra thought. I couldn\'t hand you these gifts in person, but I hope opening them brought a few smiles your way. And if there\'s one thing I really wanted you to know today, it\'s that you are genuinely special. Happy Birthday once again, Isha.',
@@ -253,6 +275,7 @@ export const CELEBRATION_GIFTS: CelebrationGift[] = [
     ribbonColor: 'bg-[#F4D06F]',
     pattern: 'bg-[radial-gradient(#F4D06F_1.5px,transparent_1.5px)] [background-size:10px_10px]',
     iconName: 'heart',
-    isSpecialFinal: true
+    isSpecialFinal: true,
+    imagePath: './gifts/gift-23.svg'
   }
 ];

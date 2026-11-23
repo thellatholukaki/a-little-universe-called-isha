@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="globeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E0F2F1" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#80CBC4" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#80CBC4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="oceanSphere" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#4DD0E1"/>
+      <stop offset="50%" stop-color="#0097A7"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </radialGradient>
+    <linearGradient id="brassStand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF2B2"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#7C5D08"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes globeSpin { 0%, 100% { transform: rotate(-15deg); } 50% { transform: rotate(-5deg); } }
+    .globe-sphere { transform-origin: 100px 90px; animation: globeSpin 5s ease-in-out infinite; }
+  </style>
+  <circle cx="100" cy="95" r="75" fill="url(#globeGlow)" />
+  <!-- Brass Base -->
+  <ellipse cx="100" cy="170" rx="35" ry="10" fill="url(#brassStand)" stroke="#59460E" stroke-width="1.5"/>
+  <rect x="96" y="145" width="8" height="25" fill="url(#brassStand)"/>
+  <!-- Semi-Meridian Brass Arc -->
+  <path d="M100 42 C135 42 155 70 155 95 C155 125 130 148 100 148" fill="none" stroke="url(#brassStand)" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Tilted Globe Ball -->
+  <g class="globe-sphere">
+    <circle cx="100" cy="95" r="42" fill="url(#oceanSphere)" stroke="#FFF" stroke-width="1" filter="drop-shadow(0 6px 12px rgba(0,96,100,0.4))"/>
+    <!-- Continents in Golden Olive -->
+    <path d="M85 75 Q95 70 102 78 Q115 85 110 98 Q98 105 88 95 Z" fill="#C8E6C9" opacity="0.85"/>
+    <path d="M112 110 Q122 108 126 118 Q120 128 110 125 Z" fill="#C8E6C9" opacity="0.85"/>
+    <!-- Latitude & Longitude lines -->
+    <ellipse cx="100" cy="95" rx="42" ry="15" fill="none" stroke="#FFF" stroke-width="0.8" opacity="0.4"/>
+    <ellipse cx="100" cy="95" rx="20" ry="42" fill="none" stroke="#FFF" stroke-width="0.8" opacity="0.4"/>
+    <!-- Axis Pin Top & Bottom -->
+    <circle cx="100" cy="53" r="3" fill="#FFE57F"/>
+    <circle cx="100" cy="137" r="3" fill="#FFE57F"/>
+  </g>
+</svg>

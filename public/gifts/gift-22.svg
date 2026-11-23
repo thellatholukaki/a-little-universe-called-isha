@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="gildedStarGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFDE7" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#FFD54F" stop-opacity="0.6"/>
+      <stop offset="80%" stop-color="#FFA000" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FFA000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pureGoldL" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF7"/>
+      <stop offset="50%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#C59B27"/>
+    </linearGradient>
+    <linearGradient id="pureGoldD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C59B27"/>
+      <stop offset="60%" stop-color="#8C6D13"/>
+      <stop offset="100%" stop-color="#4E3B05"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes octoPulse { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.08) rotate(4deg); } }
+    .octo { transform-origin: 100px 100px; animation: octoPulse 3.8s ease-in-out infinite; }
+  </style>
+  <circle cx="100" cy="100" r="85" fill="url(#gildedStarGlow)" />
+  <g class="octo" filter="drop-shadow(0 0 20px rgba(255,213,79,0.9))">
+    <!-- 8-pointed Faceted Compass Star -->
+    <!-- Point 1 (N) -->
+    <polygon points="100,100 100,28 110,88" fill="url(#pureGoldL)"/>
+    <polygon points="100,100 100,28 90,88" fill="url(#pureGoldD)"/>
+    <!-- Point 2 (E) -->
+    <polygon points="100,100 172,100 112,110" fill="url(#pureGoldL)"/>
+    <polygon points="100,100 172,100 112,90" fill="url(#pureGoldD)"/>
+    <!-- Point 3 (S) -->
+    <polygon points="100,100 100,172 90,112" fill="url(#pureGoldL)"/>
+    <polygon points="100,100 100,172 110,112" fill="url(#pureGoldD)"/>
+    <!-- Point 4 (W) -->
+    <polygon points="100,100 28,100 88,90" fill="url(#pureGoldL)"/>
+    <polygon points="100,100 28,100 88,110" fill="url(#pureGoldD)"/>
+    <!-- Diagonals NE, SE, SW, NW -->
+    <polygon points="100,100 150,50 115,85" fill="url(#pureGoldL)"/>
+    <polygon points="100,100 150,50 100,75" fill="url(#pureGoldD)"/>
+    <polygon points="100,100 150,150 100,125" fill="url(#pureGoldL)"/>
+    <polygon points="100,100 150,150 125,100" fill="url(#pureGoldD)"/>
+    <polygon points="100,100 50,150 75,100" fill="url(#pureGoldL)"/>
+    <polygon points="100,100 50,150 100,125" fill="url(#pureGoldD)"/>
+    <polygon points="100,100 50,50 100,75" fill="url(#pureGoldL)"/>
+    <polygon points="100,100 50,50 75,100" fill="url(#pureGoldD)"/>
+    <!-- Central Brilliant Crystal -->
+    <circle cx="100" cy="100" r="9" fill="#FFFFFF" filter="drop-shadow(0 0 8px #FFF)"/>
+  </g>
+</svg>

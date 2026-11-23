@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="pastelGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF0F5" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#E8C5C8" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#E8C5C8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="kraftWrap" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8D5B5"/>
+      <stop offset="60%" stop-color="#CBB592"/>
+      <stop offset="100%" stop-color="#9C835D"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes pastelBreeze { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+    .bouquet { transform-origin: 100px 150px; animation: pastelBreeze 4s ease-in-out infinite; }
+  </style>
+  <circle cx="100" cy="95" r="75" fill="url(#pastelGlow)" />
+  <g class="bouquet">
+    <!-- Hydrangea Cloud Left (Lilac) -->
+    <circle cx="75" cy="75" r="16" fill="#D1C4E9"/>
+    <circle cx="68" cy="85" r="14" fill="#B39DDB"/>
+    <circle cx="85" cy="85" r="14" fill="#EDE7F6"/>
+    <!-- Peony Center (Pastel Pink) -->
+    <circle cx="100" cy="65" r="22" fill="#F8BBD0"/>
+    <circle cx="100" cy="65" r="14" fill="#F48FB1"/>
+    <circle cx="100" cy="65" r="7" fill="#AD1457"/>
+    <!-- Baby's Breath / Sweet Peas Right (Soft Mint/Sky) -->
+    <circle cx="125" cy="75" r="16" fill="#B2DFDB"/>
+    <circle cx="132" cy="85" r="14" fill="#80CBC4"/>
+    <circle cx="115" cy="85" r="14" fill="#E0F2F1"/>
+    <!-- Kraft Paper Bouquet Wrap Cone -->
+    <polygon points="55,100 145,100 110,180 90,180" fill="url(#kraftWrap)" stroke="#7A623F" stroke-width="1.5" filter="drop-shadow(0 6px 12px rgba(122,98,63,0.35))"/>
+    <!-- Lavender Silk Ribbon -->
+    <ellipse cx="94" cy="120" rx="8" ry="4" fill="#BA68C8" transform="rotate(-15 94 120)"/>
+    <ellipse cx="106" cy="120" rx="8" ry="4" fill="#BA68C8" transform="rotate(15 106 120)"/>
+    <circle cx="100" cy="120" r="3.5" fill="#E1BEE7"/>
+  </g>
+</svg>

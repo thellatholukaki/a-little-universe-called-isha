@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="crystalGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E2D4F7" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#9F8BB7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#9F8BB7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="crystalWing1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#D0BCFF" stop-opacity="0.7"/>
+      <stop offset="80%" stop-color="#80DEEA" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#B388FF" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="crystalWing2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#D0BCFF" stop-opacity="0.7"/>
+      <stop offset="80%" stop-color="#80DEEA" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#B388FF" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes wingFlapL { 0%, 100% { transform: scaleX(1) rotate(0deg); } 50% { transform: scaleX(0.75) rotate(-6deg); } }
+    @keyframes wingFlapR { 0%, 100% { transform: scaleX(1) rotate(0deg); } 50% { transform: scaleX(0.75) rotate(6deg); } }
+    @keyframes gentleDrift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes prismaticShift { 0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 8px rgba(179,136,255,0.7)); } 50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(128,222,234,0.9)); } }
+    .butterfly-body { animation: gentleDrift 3.5s ease-in-out infinite; }
+    .wing-left { transform-origin: 100px 100px; animation: wingFlapL 2.8s ease-in-out infinite; }
+    .wing-right { transform-origin: 100px 100px; animation: wingFlapR 2.8s ease-in-out infinite; }
+    .prismatic { animation: prismaticShift 3s ease-in-out infinite; }
+  </style>
+  <circle cx="100" cy="100" r="80" fill="url(#crystalGlow)" />
+  <g class="butterfly-body prismatic">
+    <!-- Left Forewing -->
+    <path class="wing-left" d="M100 95 C85 55, 30 45, 25 75 C20 100, 60 115, 96 102 Z" fill="url(#crystalWing1)" stroke="#FFFFFF" stroke-width="1.5"/>
+    <!-- Left Hindwing -->
+    <path class="wing-left" d="M98 102 C75 110, 45 130, 55 155 C65 170, 95 145, 99 112 Z" fill="url(#crystalWing1)" stroke="#FFFFFF" stroke-width="1.2"/>
+    <!-- Right Forewing -->
+    <path class="wing-right" d="M100 95 C115 55, 170 45, 175 75 C180 100, 140 115, 104 102 Z" fill="url(#crystalWing2)" stroke="#FFFFFF" stroke-width="1.5"/>
+    <!-- Right Hindwing -->
+    <path class="wing-right" d="M102 102 C125 110, 155 130, 145 155 C135 170, 105 145, 101 112 Z" fill="url(#crystalWing2)" stroke="#FFFFFF" stroke-width="1.2"/>
+    <!-- Crystal Facet Lines -->
+    <path d="M100 95 L50 75 M100 95 L65 100 M100 102 L70 140" stroke="#FFF" stroke-width="0.8" opacity="0.75"/>
+    <path d="M100 95 L150 75 M100 95 L135 100 M100 102 L130 140" stroke="#FFF" stroke-width="0.8" opacity="0.75"/>
+    <!-- Body -->
+    <ellipse cx="100" cy="102" rx="4" ry="18" fill="#5E35B1" stroke="#FFF" stroke-width="1"/>
+    <circle cx="100" cy="80" r="5" fill="#7E57C2" stroke="#FFF" stroke-width="1"/>
+    <!-- Antennae -->
+    <path d="M99 76 Q85 60 78 64" stroke="#D1C4E9" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M101 76 Q115 60 122 64" stroke="#D1C4E9" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <circle cx="78" cy="64" r="2.5" fill="#FFF"/>
+    <circle cx="122" cy="64" r="2.5" fill="#FFF"/>
+  </g>
+</svg>
