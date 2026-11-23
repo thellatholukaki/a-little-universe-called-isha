@@ -22,12 +22,12 @@ export const WelcomeSurprise: React.FC<WelcomeSurpriseProps> = ({ onStartCelebra
 
     // Release beautiful rose and gold petal confetti
     confetti({
-      particleCount: 55,
-      spread: 80,
+      particleCount: 65,
+      spread: 85,
       origin: { y: 0.6 },
       colors: ['#D9485F', '#E07085', '#F4D06F', '#FFF9F0', '#C9C0E8', '#BA2D44'],
-      scalar: 1.1,
-      ticks: 200,
+      scalar: 1.15,
+      ticks: 220,
     });
 
     setTimeout(() => {
@@ -39,56 +39,89 @@ export const WelcomeSurprise: React.FC<WelcomeSurpriseProps> = ({ onStartCelebra
   };
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center px-4 sm:px-6 py-8 select-none text-center">
-      {/* Fairy Lights Garland along top */}
-      <div className="absolute top-2 left-0 right-0 flex justify-around pointer-events-none opacity-80 px-4">
-        {[...Array(9)].map((_, i) => (
+    <div className="relative w-full h-full flex flex-col items-center justify-start sm:justify-center px-4 sm:px-6 py-6 sm:py-8 select-none text-center overflow-y-auto no-scrollbar">
+      {/* Luminous Fairy Lights Garland along top */}
+      <div className="absolute top-2 left-0 right-0 flex justify-around pointer-events-none opacity-85 px-4 z-10">
+        {[...Array(11)].map((_, i) => (
           <motion.div
             key={i}
             animate={{
-              opacity: [0.4, 1, 0.4],
-              scale: [0.9, 1.1, 0.9]
+              opacity: [0.45, 1, 0.45],
+              scale: [0.92, 1.12, 0.92],
             }}
             transition={{
-              duration: 2.2 + (i % 3) * 0.4,
+              duration: 2.2 + (i % 4) * 0.35,
               repeat: Infinity,
-              delay: i * 0.25
+              delay: i * 0.2,
+              ease: 'easeInOut',
             }}
             className="flex flex-col items-center"
           >
-            <div className="w-px h-3 bg-champagne-dark/50" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[#FFDF80] shadow-[0_0_10px_#FFAE19]" />
+            <div className="w-px h-3.5 bg-champagne-dark/60" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#FFDF80] shadow-[0_0_12px_#FFAE19,0_0_4px_#FFF]" />
           </motion.div>
         ))}
       </div>
 
-      <div className="relative z-20 max-w-xl w-full flex flex-col items-center">
+      {/* Floating Golden Dust & Heart Motes */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`gold-dust-${i}`}
+            className="absolute rounded-full"
+            style={{
+              top: `${15 + (i * 11)}%`,
+              left: `${8 + (i * 12)}%`,
+              width: i % 2 === 0 ? '4px' : '6px',
+              height: i % 2 === 0 ? '4px' : '6px',
+              backgroundColor: i % 2 === 0 ? '#FFDF80' : '#F2A6B3',
+            }}
+            animate={{
+              y: [-10, 10, -10],
+              x: [-6, 6, -6],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [0.8, 1.3, 0.8],
+            }}
+            transition={{
+              duration: 4 + (i % 3),
+              repeat: Infinity,
+              delay: i * 0.4,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-20 max-w-xl w-full flex flex-col items-center my-auto">
         {/* Welcome Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          className="mb-4 sm:mb-6"
+          className="mb-3 sm:mb-5"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dustyRose/20 border border-dustyRose/40 mb-3 text-xs tracking-widest uppercase font-sans text-midnight font-medium backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-dustyRose/20 border border-dustyRose/40 mb-2.5 text-xs tracking-widest uppercase font-sans text-midnight font-medium backdrop-blur-sm shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-dustyRose-dark" />
             <span>A Milestone Surprise • 24 November 2026</span>
           </div>
 
           <h1 className="font-serif text-3xl sm:text-5xl text-midnight font-normal tracking-tight leading-tight">
-            Hey Isha! Today is your day!
+            A Little Universe, Made Just for You, My Bangaram.
           </h1>
+          <p className="font-handwriting text-xl sm:text-2xl text-dustyRose-dark font-semibold mt-1">
+            Welcome to your special birthday sanctuary ❤️
+          </p>
         </motion.div>
 
-        {/* Giant Interactive Gift Box */}
+        {/* Giant Interactive Gift Box with Illuminated Wax Seal */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="relative my-4 cursor-pointer group"
+          className="relative my-3 sm:my-4 cursor-pointer group"
           onClick={handleCelebrate}
         >
-          {/* Box Shadow & Glow */}
+          {/* Box Shadow & Ambient Glow */}
           <div className="absolute inset-0 rounded-3xl bg-dustyRose/30 filter blur-2xl transform translate-y-6 group-hover:translate-y-8 transition-transform duration-500" />
 
           {/* 3D Luxury Birthday Gift Box */}
@@ -105,6 +138,22 @@ export const WelcomeSurprise: React.FC<WelcomeSurpriseProps> = ({ onStartCelebra
             <div className="absolute left-0 right-0 h-12 sm:h-14 bg-gradient-to-b from-[#FFDF80] via-[#F4D06F] to-[#D4A737] shadow-md z-10 flex items-center justify-center">
               <div className="h-0.5 w-full bg-[#FFEBB3]/60" />
             </div>
+
+            {/* Center Illuminated Wax Seal on Cross Ribbon */}
+            <motion.div
+              animate={{
+                scale: [1, 1.06, 1],
+                filter: [
+                  'drop-shadow(0 0 10px rgba(255, 223, 128, 0.7))',
+                  'drop-shadow(0 0 18px rgba(255, 200, 80, 0.95))',
+                  'drop-shadow(0 0 10px rgba(255, 223, 128, 0.7))'
+                ]
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute z-20 w-12 h-12 rounded-full bg-gradient-to-br from-[#D9384E] via-[#A8182B] to-[#610713] border-2 border-[#FFE085] flex items-center justify-center shadow-lg"
+            >
+              <Heart className="w-6 h-6 text-[#FFE085] fill-[#FFE085]/40" />
+            </motion.div>
 
             {/* Animated Box Lid (Lifts on Open) */}
             <motion.div
@@ -127,17 +176,17 @@ export const WelcomeSurprise: React.FC<WelcomeSurpriseProps> = ({ onStartCelebra
               </div>
             </motion.div>
 
-            {/* Interior Reveal: Golden Glow and Birthday Crest */}
+            {/* Interior Reveal: Golden Glow and Birthday Message */}
             <motion.div
               animate={isOpening ? { scale: 1.1, opacity: 1 } : { scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.6 }}
-              className="relative z-30 flex flex-col items-center justify-center text-ivory"
+              className="relative z-30 flex flex-col items-center justify-center text-ivory px-4 text-center"
             >
               <span className="font-serif italic text-xl sm:text-2xl font-semibold text-[#FFE085]">
-                Happy 23rd, Isha!
+                Happy 23rd, My Bangaram!
               </span>
-              <p className="text-xs font-sans tracking-widest uppercase text-ivory/90 mt-1">
-                Your Celebration Begins ✨
+              <p className="text-xs font-sans tracking-widest uppercase text-ivory/95 mt-1 font-medium">
+                Your Little Universe Begins ✨
               </p>
             </motion.div>
           </div>
@@ -148,22 +197,22 @@ export const WelcomeSurprise: React.FC<WelcomeSurpriseProps> = ({ onStartCelebra
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="vintage-card p-5 sm:p-6 rounded-2xl max-w-lg mx-auto shadow-md border border-dustyRose/30 my-3"
+          className="vintage-card p-4 sm:p-6 rounded-2xl max-w-lg mx-auto shadow-md border border-dustyRose/30 my-2.5 sm:my-3"
         >
-          <p className="font-serif text-base sm:text-lg text-midnight/90 leading-relaxed italic">
-            "I couldn't be there to celebrate with you in person, but I didn't want the day to pass without doing something special."
+          <p className="font-serif text-sm sm:text-base text-midnight/90 leading-relaxed italic">
+            "I couldn't be there to celebrate beside you in person today, but I wanted to make sure this milestone was truly unforgettable."
           </p>
-          <p className="font-handwriting text-xl sm:text-2xl text-dustyRose-dark font-bold mt-2">
-            So, I arranged a little celebration for you here. Ready?
+          <p className="font-handwriting text-xl sm:text-2xl text-dustyRose-dark font-bold mt-1.5 sm:mt-2">
+            So, I arranged this little universe for you here. Ready?
           </p>
         </motion.div>
 
-        {/* Let's Celebrate Button */}
+        {/* Open Your Surprise Button */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-3"
+          className="mt-2 sm:mt-3"
         >
           <button
             onClick={handleCelebrate}
@@ -171,7 +220,7 @@ export const WelcomeSurprise: React.FC<WelcomeSurpriseProps> = ({ onStartCelebra
             className="flex items-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#B22234] to-[#8C1625] hover:from-[#C72A3E] hover:to-[#A31D2E] text-ivory font-sans text-sm sm:text-base font-semibold tracking-wide shadow-xl active:scale-95 transition-all hover:shadow-[0_0_25px_rgba(217,72,95,0.45)] group cursor-pointer"
           >
             <Sparkles className="w-5 h-5 text-[#FFE085] group-hover:rotate-12 transition-transform" />
-            <span>Let's Celebrate! 🎁</span>
+            <span>Open Your Surprise ✨</span>
           </button>
         </motion.div>
       </div>

@@ -149,7 +149,7 @@ export const Scene6StarryNight: React.FC<Scene6StarryNightProps> = ({ onRestart 
                 {/* Closing Birthday Wish */}
                 <div className="pt-1">
                   <p className="font-serif text-lg sm:text-xl text-dustyRose-light font-medium text-center">
-                    Happy Birthday once again, Isha.
+                    Happy Birthday once again, My Bangaram.
                   </p>
                   <p className="font-serif italic text-sm sm:text-base text-ivory/80 text-center mt-1">
                     May your 23<sup className="text-xs">rd</sup> chapter be your most beautiful one yet.
@@ -197,7 +197,7 @@ export const Scene6StarryNight: React.FC<Scene6StarryNightProps> = ({ onRestart 
               "Some moments are meant to simply be enjoyed under the quiet stars..."
             </p>
             <p className="font-handwriting text-2xl text-lavender-light mt-3">
-              Happy 23rd, Isha.
+              Happy 23rd, My Bangaram.
             </p>
           </motion.div>
         )}

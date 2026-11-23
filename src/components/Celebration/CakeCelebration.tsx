@@ -52,7 +52,7 @@ export const CakeCelebration: React.FC<CakeCelebrationProps> = ({ onContinueToCh
             Before we open all your surprises, there's one important thing...
           </h2>
           <p className="font-handwriting text-2xl sm:text-3xl text-dustyRose-dark font-bold mt-1">
-            Make a wish, Isha!
+            Make a wish, My Bangaram!
           </p>
         </motion.div>
 
@@ -63,6 +63,20 @@ export const CakeCelebration: React.FC<CakeCelebrationProps> = ({ onContinueToCh
           transition={{ duration: 0.9, delay: 0.2 }}
           className="relative my-4 flex flex-col items-center"
         >
+          {/* Ambient Candlelight Golden Glow Aura */}
+          <motion.div
+            animate={{
+              opacity: candlesBlown ? [0.5, 0] : [0.35, 0.65, 0.35],
+              scale: candlesBlown ? [1, 1.2] : [0.96, 1.05, 0.96]
+            }}
+            transition={{
+              duration: candlesBlown ? 0.8 : 2.4,
+              repeat: candlesBlown ? 0 : Infinity,
+              ease: 'easeInOut'
+            }}
+            className="absolute -top-12 w-64 h-64 rounded-full bg-radial from-[#FFE085]/35 via-[#FF9E4A]/15 to-transparent blur-2xl pointer-events-none z-0"
+          />
+
           {/* Milestone 23 Golden Monogram Cake Topper */}
           <div className="relative z-20 -mb-2 flex items-center justify-center">
             <span className="font-display italic text-3xl sm:text-4xl font-bold text-[#C59B27] drop-shadow-[0_2px_8px_rgba(255,223,128,0.7)]">
@@ -122,7 +136,7 @@ export const CakeCelebration: React.FC<CakeCelebrationProps> = ({ onContinueToCh
             </div>
             {/* Floral accents */}
             <span className="text-xs text-[#BA2D44] font-serif italic pt-3">
-              ❀ Made for Isha ❀
+              ❀ Made for My Bangaram ❀
             </span>
           </div>
 
@@ -184,16 +198,16 @@ export const CakeCelebration: React.FC<CakeCelebrationProps> = ({ onContinueToCh
                   <span>Wish Released Into The Universe</span>
                 </div>
 
-                <h3 className="font-serif text-2xl sm:text-3xl text-midnight font-normal uppercase tracking-wide">
-                  Happy 23<sup className="text-sm">rd</sup> Birthday, Isha!
+                <h3 className="font-serif text-2xl sm:text-3xl text-midnight font-normal tracking-wide">
+                  23 looks beautiful on you, My Bangaram.
                 </h3>
 
                 <p className="font-serif text-base sm:text-lg text-midnight/90 leading-relaxed italic">
                   "I hope that whatever you wished for finds its way to you. You deserve so many beautiful things."
                 </p>
 
-                <p className="font-handwriting text-xl text-dustyRose-dark font-bold pt-1">
-                  May this chapter be your most joyful one yet.
+                <p className="font-handwriting text-xl sm:text-2xl text-dustyRose-dark font-bold pt-1">
+                  Happy 23rd Birthday, My Bangaram! May this chapter be your most joyful one yet.
                 </p>
               </div>
 

@@ -1,9 +1,9 @@
-# A Little Universe Called Isha ✨
-### *An Interactive Virtual Birthday Celebration for Isha's 23rd Birthday*
+# A Little Universe Called My Bangaram ✨
+### *An Interactive 23rd Birthday Celebration & Unforgettable Romantic Proposal*
 
 > *"I may be miles away, but I still wanted to celebrate your special day with you. So, I brought the celebration to you in my own little way."*
 
-A bespoke, immersive online birthday experience dedicated to **Isha** on her 23rd Birthday (24 November 2026).
+A bespoke, immersive online birthday celebration and romantic proposal dedicated to **My Bangaram** on her 23rd Birthday (24 November 2026).
 
 ---
 
@@ -70,10 +70,12 @@ The experience recreates the emotional journey of an offline birthday party thro
    - Heartfelt, mature expression communicating affection through thoughtful words without direct confessions or romantic pressure:
      > *"Sometimes, there are people who become a little more special without even trying... No expectations, no explanations needed. Just a small reminder that someone thinks you're pretty special. And I hope that makes you smile."*
 
-7. **Grand Finale & Starry Celebration Hub**
-   - Luminous crescent moon and starry twilight atmosphere.
-   - Final warm birthday blessings.
-   - Quick-access Celebration Hub to revisit the Cake, Chocolates, 23 Gifts, Sketches, or Letter at any time.
+7. **Grand Finale & The Unforgettable Proposal**
+   - Multi-phase romantic sequence under the quiet midnight sky and glowing crescent moon.
+   - **Phase A**: Sequential romantic storytelling for My Bangaram.
+   - **Phase B**: 23 celestial stars emerge and draw golden glowing lines forming a heart constellation.
+   - **Phase C**: A glowing 3D golden diamond ring materializes at the centre with radiant light rays and heartfelt proposal.
+   - **Phase D**: Thoughtful interactive options ("Yes, My Love! ❤️" with full confetti celebration, and "I Need a Moment ✨" with unconditional patience).
    - Peaceful **"Stargazing Mode"** toggle and **"Revisit from the Beginning ↺"** option.
 
 ---

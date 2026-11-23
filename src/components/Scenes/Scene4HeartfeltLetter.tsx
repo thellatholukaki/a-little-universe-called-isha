@@ -7,7 +7,7 @@ interface Scene4HeartfeltLetterProps {
 }
 
 const LETTER_PARAGRAPHS = [
-  "Dear Isha,",
+  "Dear My Bangaram,",
   "On your special day, I just wanted to remind you how wonderful it is to have someone like you around.",
   "There is something beautiful about the way certain people make ordinary moments feel a little different. Sometimes, without even realizing it, they bring a smile to someone's face.",
   "I hope this new chapter of your life brings you countless reasons to smile, unexpected adventures, wonderful opportunities and moments that make your heart genuinely happy.",
@@ -110,7 +110,7 @@ export const Scene4HeartfeltLetter: React.FC<Scene4HeartfeltLetterProps> = ({ on
                         {paragraph}
                       </p>
                       <span className="font-serif italic text-xs text-graphite mt-1">
-                        A Little Universe Called Isha • 2026
+                        A Little Universe Called My Bangaram • 2026
                       </span>
                     </div>
                   ) : isHighlighted ? (

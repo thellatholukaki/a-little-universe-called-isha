@@ -412,6 +412,165 @@ class AudioEngine {
     this.playGiftOpen();
   }
 
+  /**
+   * Interactive Sound: Realistic crisp wax seal crack and soft paper peel
+   */
+  public playWaxSealBreak() {
+    try {
+      this.initSfxContext();
+      if (!this.sfxCtx || !this.sfxGain) return;
+
+      const now = this.sfxCtx.currentTime;
+
+      // 1. Crisp wax crack (filtered noise burst)
+      const bufferSize = Math.floor(this.sfxCtx.sampleRate * 0.12);
+      const buffer = this.sfxCtx.createBuffer(1, bufferSize, this.sfxCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.25));
+      }
+      const noise = this.sfxCtx.createBufferSource();
+      noise.buffer = buffer;
+
+      const filter = this.sfxCtx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(2400, now);
+      filter.Q.setValueAtTime(3, now);
+
+      const noiseGain = this.sfxCtx.createGain();
+      noiseGain.gain.setValueAtTime(0.14, now);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+
+      noise.connect(filter);
+      filter.connect(noiseGain);
+      noiseGain.connect(this.sfxGain);
+
+      noise.start(now);
+      noise.stop(now + 0.13);
+
+      // 2. Warm resonant parchment slide chime
+      const osc = this.sfxCtx.createOscillator();
+      const oscGain = this.sfxCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(329.63, now + 0.05); // E4
+      osc.frequency.exponentialRampToValueAtTime(523.25, now + 0.35); // C5
+
+      oscGain.gain.setValueAtTime(0.0001, now + 0.05);
+      oscGain.gain.linearRampToValueAtTime(0.08, now + 0.09);
+      oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.7);
+
+      osc.connect(oscGain);
+      oscGain.connect(this.sfxGain);
+
+      osc.start(now + 0.05);
+      osc.stop(now + 0.75);
+    } catch {
+      // Graceful fallback
+    }
+  }
+
+  /**
+   * Interactive Sound: Celestial constellation connect chime
+   */
+  public playConstellationChime() {
+    try {
+      this.initSfxContext();
+      if (!this.sfxCtx || !this.sfxGain) return;
+
+      const now = this.sfxCtx.currentTime;
+      // Dreamy pentatonic upward sparkle
+      const notes = [440.00, 554.37, 659.25, 880.00, 1108.73, 1318.51, 1760.00];
+
+      notes.forEach((freq, i) => {
+        const osc = this.sfxCtx!.createOscillator();
+        const gain = this.sfxCtx!.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.08);
+
+        gain.gain.setValueAtTime(0.0001, now + i * 0.08);
+        gain.gain.linearRampToValueAtTime(0.08, now + i * 0.08 + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.08 + 1.4);
+
+        osc.connect(gain);
+        gain.connect(this.sfxGain!);
+
+        osc.start(now + i * 0.08);
+        osc.stop(now + i * 0.08 + 1.5);
+      });
+    } catch {
+      // Graceful fallback
+    }
+  }
+
+  /**
+   * Interactive Sound: Ring reveal golden bell chime
+   */
+  public playRingRevealChime() {
+    try {
+      this.initSfxContext();
+      if (!this.sfxCtx || !this.sfxGain) return;
+
+      const now = this.sfxCtx.currentTime;
+      // Deep warm chord + crystalline ring resonance
+      const chord = [277.18, 415.30, 554.37, 830.61, 1108.73];
+
+      chord.forEach((freq, idx) => {
+        const osc = this.sfxCtx!.createOscillator();
+        const gain = this.sfxCtx!.createGain();
+        osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.04);
+
+        gain.gain.setValueAtTime(0.0001, now + idx * 0.04);
+        gain.gain.linearRampToValueAtTime(0.09, now + idx * 0.04 + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.04 + 2.2);
+
+        osc.connect(gain);
+        gain.connect(this.sfxGain!);
+
+        osc.start(now + idx * 0.04);
+        osc.stop(now + idx * 0.04 + 2.4);
+      });
+    } catch {
+      // Graceful fallback
+    }
+  }
+
+  /**
+   * Interactive Sound: Full romantic "Yes" proposal celebration chime cascade
+   */
+  public playProposalYesCelebration() {
+    try {
+      this.initSfxContext();
+      if (!this.sfxCtx || !this.sfxGain) return;
+
+      const now = this.sfxCtx.currentTime;
+      // Majestic ascending fanfare arpeggios
+      const notes = [
+        329.63, 440.00, 554.37, 659.25, 880.00, 1108.73, 1318.51, 1760.00,
+        1318.51, 1760.00, 2217.46
+      ];
+
+      notes.forEach((freq, i) => {
+        const osc = this.sfxCtx!.createOscillator();
+        const gain = this.sfxCtx!.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + i * 0.09);
+
+        gain.gain.setValueAtTime(0.0001, now + i * 0.09);
+        gain.gain.linearRampToValueAtTime(0.12, now + i * 0.09 + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.09 + 2.0);
+
+        osc.connect(gain);
+        gain.connect(this.sfxGain!);
+
+        osc.start(now + i * 0.09);
+        osc.stop(now + i * 0.09 + 2.2);
+      });
+    } catch {
+      // Graceful fallback
+    }
+  }
+
   // =========================================================================
   // Procedural Web Audio Synth Fallback
   // Only engaged if audio files are completely inaccessible or blocked.

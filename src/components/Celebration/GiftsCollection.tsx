@@ -17,7 +17,7 @@ export const GiftsCollection: React.FC<GiftsCollectionProps> = ({
   onContinueToLetter 
 }) => {
   const [openedGiftIds, setOpenedGiftIds] = useState<Set<number>>(() => {
-    const saved = sessionStorage.getItem('isha_opened_gifts');
+    const saved = sessionStorage.getItem('bangaram_opened_gifts') || sessionStorage.getItem('isha_opened_gifts');
     return saved ? new Set(JSON.parse(saved)) : new Set([1]);
   });
   const [activeGift, setActiveGift] = useState<CelebrationGift | null>(null);
@@ -29,7 +29,7 @@ export const GiftsCollection: React.FC<GiftsCollectionProps> = ({
     if (!openedGiftIds.has(gift.id)) {
       const nextOpened = new Set(openedGiftIds).add(gift.id);
       setOpenedGiftIds(nextOpened);
-      sessionStorage.setItem('isha_opened_gifts', JSON.stringify([...nextOpened]));
+      sessionStorage.setItem('bangaram_opened_gifts', JSON.stringify([...nextOpened]));
 
       // Delightful sparkle confetti burst for each new gift opened
       confetti({
