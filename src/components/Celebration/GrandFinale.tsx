@@ -422,13 +422,13 @@ export const GrandFinale: React.FC<GrandFinaleProps> = ({
                     </p>
 
                     <p className="text-sm sm:text-base leading-relaxed text-ivory/90">
-                      Your smile, your presence, and the little things that make you who you are mean more to me than words can explain. Somewhere along the way, I realised that my feelings for you are more than ordinary.
+                      Your presence and the little things that make you who you are mean more to me than words can explain. Somewhere along the way, I realised that my feelings for you are more than ordinary.
                     </p>
 
                     <div className="w-16 h-px bg-[#D4AF37]/60 mx-auto my-2" />
 
                     <p className="font-serif italic text-base sm:text-lg text-[#FFE085]">
-                      "I like you, Bangaram. And I would really love to know if you feel the same way about me."
+                      "I'm into you, Bangaram. And I would really love to know if you feel the same way about me."
                     </p>
 
                     <h3 className="font-serif text-xl sm:text-2xl text-white font-normal pt-2 leading-snug">
