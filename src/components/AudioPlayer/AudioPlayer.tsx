@@ -75,7 +75,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ hasStartedAudio }) => 
           </div>
 
           <span className="hidden sm:inline-block font-serif italic text-sm text-midnight/90">
-            {isPlaying ? "Ambient Melody" : "Music Paused"}
+            {isPlaying ? "Romantic Love Theme" : "Music Paused"}
           </span>
         </button>
 

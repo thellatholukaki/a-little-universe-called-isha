@@ -21,8 +21,5 @@ export interface AudioState {
 
 export interface Illustration {
   id: string;
-  title: string;
-  caption: string;
-  quote: string;
   imagePath: string;
 }

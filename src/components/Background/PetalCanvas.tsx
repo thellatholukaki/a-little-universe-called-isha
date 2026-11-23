@@ -17,6 +17,18 @@ interface Particle {
   color: string;
 }
 
+interface Butterfly {
+  x: number;
+  y: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+  wingAngle: number;
+  wingSpeed: number;
+  opacity: number;
+  color: string;
+}
+
 export const PetalCanvas: React.FC<PetalCanvasProps> = ({ isNightMode = false }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -42,13 +54,15 @@ export const PetalCanvas: React.FC<PetalCanvasProps> = ({ isNightMode = false })
     const dayColors = {
       petals: ['rgba(217, 166, 160, 0.45)', 'rgba(233, 220, 203, 0.5)', 'rgba(169, 183, 160, 0.35)', 'rgba(201, 192, 232, 0.35)'],
       stars: ['rgba(217, 166, 160, 0.6)', 'rgba(197, 155, 39, 0.5)'],
-      dust: 'rgba(197, 155, 39, 0.25)'
+      dust: 'rgba(197, 155, 39, 0.25)',
+      butterflies: ['rgba(217, 166, 160, 0.55)', 'rgba(201, 192, 232, 0.5)']
     };
 
     const nightColors = {
       petals: ['rgba(201, 192, 232, 0.4)', 'rgba(217, 166, 160, 0.35)', 'rgba(255, 249, 240, 0.45)'],
       stars: ['rgba(255, 249, 240, 0.95)', 'rgba(201, 192, 232, 0.85)', 'rgba(230, 200, 117, 0.85)'],
-      dust: 'rgba(201, 192, 232, 0.3)'
+      dust: 'rgba(201, 192, 232, 0.3)',
+      butterflies: ['rgba(201, 192, 232, 0.65)', 'rgba(255, 249, 240, 0.55)']
     };
 
     const colors = isNightMode ? nightColors : dayColors;
@@ -79,10 +93,28 @@ export const PetalCanvas: React.FC<PetalCanvasProps> = ({ isNightMode = false })
       });
     }
 
+    // 3 subtle romantic butterflies fluttering slowly
+    const butterflyCount = 3;
+    const butterflies: Butterfly[] = [];
+    for (let i = 0; i < butterflyCount; i++) {
+      butterflies.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: 7 + Math.random() * 4,
+        speedX: 0.4 + Math.random() * 0.4,
+        speedY: (Math.random() - 0.5) * 0.4,
+        wingAngle: Math.random() * Math.PI,
+        wingSpeed: 0.12 + Math.random() * 0.05,
+        opacity: 0.55 + Math.random() * 0.25,
+        color: colors.butterflies[i % colors.butterflies.length]
+      });
+    }
+
     // Render loop
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
+      // Render drifting petals & glowing stars
       particles.forEach((p) => {
         ctx.save();
 
@@ -92,7 +124,6 @@ export const PetalCanvas: React.FC<PetalCanvasProps> = ({ isNightMode = false })
           ctx.rotate((p.angle * Math.PI) / 180);
           ctx.fillStyle = p.color;
           ctx.beginPath();
-          // Draw organic petal teardrop/curved shape
           ctx.moveTo(0, 0);
           ctx.bezierCurveTo(p.size, -p.size * 0.8, p.size * 1.6, p.size * 0.8, 0, p.size * 2);
           ctx.bezierCurveTo(-p.size * 1.6, p.size * 0.8, -p.size, -p.size * 0.8, 0, 0);
@@ -146,6 +177,51 @@ export const PetalCanvas: React.FC<PetalCanvasProps> = ({ isNightMode = false })
         ctx.restore();
       });
 
+      // Render subtle fluttering butterflies
+      butterflies.forEach((b) => {
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        ctx.fillStyle = b.color;
+
+        b.wingAngle += b.wingSpeed;
+        const wingScale = Math.sin(b.wingAngle); // -1 to 1 for wing flap
+
+        // Left Wing
+        ctx.save();
+        ctx.scale(Math.abs(wingScale) * 0.8 + 0.2, 1);
+        ctx.beginPath();
+        ctx.ellipse(-b.size * 0.6, 0, b.size * 0.8, b.size * 0.5, -0.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Right Wing
+        ctx.save();
+        ctx.scale(Math.abs(wingScale) * 0.8 + 0.2, 1);
+        ctx.beginPath();
+        ctx.ellipse(b.size * 0.6, 0, b.size * 0.8, b.size * 0.5, 0.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Body
+        ctx.fillStyle = isNightMode ? 'rgba(255, 249, 240, 0.8)' : 'rgba(37, 38, 65, 0.4)';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, b.size * 0.12, b.size * 0.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+
+        // Butterfly motion path: gentle wave
+        b.x += b.speedX;
+        b.y += Math.sin(b.x * 0.015) * 0.7 + b.speedY;
+
+        if (b.x > width + 40) {
+          b.x = -40;
+          b.y = Math.random() * height;
+        }
+        if (b.y < -30) b.y = height + 30;
+        if (b.y > height + 30) b.y = -30;
+      });
+
       animationFrameId = requestAnimationFrame(render);
     };
 
@@ -161,7 +237,7 @@ export const PetalCanvas: React.FC<PetalCanvasProps> = ({ isNightMode = false })
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-10 w-full h-full"
-      style={{ opacity: 0.85 }}
+      style={{ opacity: 0.88 }}
     />
   );
 };

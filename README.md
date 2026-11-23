@@ -32,13 +32,13 @@ An interactive, multi-scene birthday web experience handcrafted for **Isha's 23r
    - Milestone 23 with delicate pastel confetti and floating flowers.
    - Thoughtful reflection: *"Today isn't just another date on the calendar. It's a little reminder that the world became a little more interesting 23 years ago."*
 3. **Scene 3: A Little Sketch of You**
-   - 5 graphite pencil sketches of a gentle fictional girl on deckled ivory paper:
-     1. *Portrait*: A Gentle Impression
-     2. *Window*: Quiet Afternoons Beside the Sunlit Window
-     3. *Flower*: Gentle Grace Holding a Wildflower
-     4. *Butterflies*: A Meadow of Butterflies
-     5. *Stars*: Gazing at the Constellations
-   - Animated pencil drawing reveal and margin notes.
+   - 5 handcrafted graphite pencil sketches of a consistent fictional character on deckled ivory paper, viewed primarily from behind with long, beautiful flowing hair:
+     1. Portrait-style study from behind with delicate wildflowers in flowing hair.
+     2. Beside a sunlit rustic window gazing into the garden.
+     3. Gently cradling a wildflower at a three-quarter rear angle.
+     4. In a meadow surrounded by fluttering butterflies.
+     5. Gazing up at the crescent moon and constellations.
+   - All individual titles and labels removed for an uninterrupted artistic experience.
 4. **Scene 4: A Few Words for You**
    - Vintage writing stationery with progressive ink reveal.
    - Heartfelt, mature, genuine personal birthday letter.
@@ -47,14 +47,15 @@ An interactive, multi-scene birthday web experience handcrafted for **Isha's 23r
    - Unfolds each wish individually with celestial chimes and a progress tracker.
 6. **Scene 6: One Last Little Thought**
    - Velvety midnight sky with crescent moon, glowing stars, and peaceful garden.
-   - Fictional sketch gazing at the stars.
-   - Final warm blessing and optional peaceful "Stargazing Mode".
+   - Pencil sketch of the girl with long flowing hair gazing at the stars.
+   - The quiet, intimate indirect confession revealed in handwritten calligraphy under the stars.
+   - Final warm birthday blessing and peaceful "Stargazing Mode".
 
 ---
 
 ## 🎵 Audio Architecture
 
-- **Procedural Ambient Piano Synthesizer**: Uses the native Web Audio API to synthesize felt-piano chord progressions (Dmaj9 → Bm9 → Gmaj7 → Aadd9) with warm lowpass filtering and delicate sparkle arpeggios.
+- **Romantic Love Theme Web Audio Engine**: Synthesizes soft romantic felt-piano chords, delicate fingerpicked acoustic guitar plucks, and warm ambient pad textures in A-Major & F#-Minor (Aadd9 → F#m9 → Dmaj7add9 → E6/9 → C#m7 → Bm11 → Dmaj9 → Asus2) with tender melodic runs.
 - **100% Royalty-Free & Autonomous**: Infinite loop, zero network dependencies, zero missing audio issues, works completely offline.
 - **Sound Effects**: Interactive chimes on envelope opening and wish reveals.
 - **Audio Controls**: Mute toggle, animated equalizer bars, expandable volume slider, and browser autoplay compliance (starts on user interaction).
