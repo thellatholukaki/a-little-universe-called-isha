@@ -1,21 +1,31 @@
-// Romantic Love Theme & Interactive Sound Effects Engine
-// Web Audio API: Felt piano, acoustic guitar, warm pads, and responsive sound effects.
-// 100% royalty-free, zero-network dependency, completely offline.
+// Background Music & Interactive Audio Engine
+// "Oohale" instrumental background score from Jaanu (2020) by Govind Vasantha
+// Features automatic continuous playback, seamless looping across all scenes,
+// browser autoplay restriction handling with first-interaction trigger,
+// and zero play/pause UI controls as requested.
 
 class AudioEngine {
-  private ctx: AudioContext | null = null;
-  private masterGain: GainNode | null = null;
+  private bgAudio: HTMLAudioElement | null = null;
+  private isInitialized: boolean = false;
   private isPlaying: boolean = false;
   private isMuted: boolean = false;
-  private volume: number = 0.65;
-  private intervalId: number | null = null;
-  private chordIndex: number = 0;
+  private volume: number = 0.38; // Consistent, comfortable background volume
+  private interactionListenersArmed: boolean = false;
 
-  // Romantic Love Theme Progression (Hz)
+  // Web Audio Context for concurrent interactive sound effects
+  private sfxCtx: AudioContext | null = null;
+  private sfxGain: GainNode | null = null;
+
+  // Fallback procedural ambient synth state (only if audio files are completely unavailable)
+  private fallbackIntervalId: number | null = null;
+  private fallbackChordIndex: number = 0;
+  private useFallbackSynth: boolean = false;
+
+  // Romantic Love Theme Progression for procedural fallback
   private romanticChords = [
     { root: 110.00, notes: [220.00, 277.18, 329.63, 440.00, 493.88], guitar: [329.63, 440.00, 554.37] }, // Aadd9
     { root: 92.50, notes: [185.00, 220.00, 277.18, 329.63, 415.30], guitar: [277.18, 329.63, 415.30] },  // F#m9
-    { root: 73.42, notes: [146.83, 220.00, 277.18, 369.99, 440.00], guitar: [369.99, 440.00, 554.37] },  // Dmaj7(add9)
+    { root: 73.42, notes: [146.83, 220.00, 277.18, 369.99, 440.00], guitar: [369.99, 440.00, 554.37] },  // Dmaj7
     { root: 82.41, notes: [164.81, 246.94, 329.63, 369.99, 440.00], guitar: [329.63, 369.99, 493.88] },  // E6/9
     { root: 69.30, notes: [138.59, 207.65, 277.18, 329.63, 392.00], guitar: [277.18, 329.63, 440.00] },  // C#m7
     { root: 61.74, notes: [123.47, 185.00, 246.94, 293.66, 369.99], guitar: [293.66, 369.99, 440.00] },  // Bm11
@@ -23,181 +33,204 @@ class AudioEngine {
     { root: 110.00, notes: [220.00, 329.63, 440.00, 493.88, 554.37], guitar: [329.63, 440.00, 659.25] }, // Asus2
   ];
 
-  private romanticMelodyNotes = [440.00, 493.88, 554.37, 659.25, 739.99, 880.00, 987.77, 1108.73];
-
   constructor() {
-    const savedMuted = sessionStorage.getItem('isha_bday_muted');
-    if (savedMuted !== null) {
-      this.isMuted = savedMuted === 'true';
-    }
-    const savedVol = sessionStorage.getItem('isha_bday_volume');
-    if (savedVol !== null) {
-      this.volume = parseFloat(savedVol);
+    // Only initialize in browser environment
+    if (typeof window !== 'undefined') {
+      this.initBackgroundAudio();
+      this.setupVisibilityListener();
     }
   }
 
-  private initContext() {
-    if (!this.ctx) {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      this.ctx = new AudioCtx();
-      this.masterGain = this.ctx.createGain();
-      this.masterGain.gain.setValueAtTime(this.isMuted ? 0 : this.volume, this.ctx.currentTime);
-      this.masterGain.connect(this.ctx.destination);
+  /**
+   * Resolve public asset base path considering Vite base config and GitHub Pages subpaths.
+   */
+  private getAssetUrl(relativePath: string): string {
+    const metaEnv = (import.meta as unknown as { env?: { BASE_URL?: string } }).env;
+    const base = metaEnv?.BASE_URL || './';
+    const cleanBase = base.endsWith('/') ? base : `${base}/`;
+    const cleanRelative = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
+    return `${cleanBase}${cleanRelative}`;
+  }
+
+  /**
+   * Initializes the single audio instance for continuous background music.
+   * Guarantees only one audio element exists across the entire app lifecycle.
+   */
+  private initBackgroundAudio() {
+    if (this.isInitialized || typeof document === 'undefined') return;
+    this.isInitialized = true;
+
+    try {
+      const audio = document.createElement('audio');
+      audio.preload = 'auto';
+      audio.loop = true;
+      audio.volume = this.volume;
+      audio.muted = this.isMuted;
+      audio.setAttribute('playsinline', 'true');
+      audio.setAttribute('webkit-playsinline', 'true');
+
+      // Candidate sources in priority order:
+      // Includes both user-supplied MP3 paths and local high-fidelity WebM/M4A instrumental audio.
+      const candidateSources = [
+        { src: this.getAssetUrl('audio/jaanu-oohale-instrumental.mp3'), type: 'audio/mpeg' },
+        { src: this.getAssetUrl('audio/oohale-instrumental.mp3'), type: 'audio/mpeg' },
+        { src: this.getAssetUrl('audio/jaanu-oohale-instrumental.webm'), type: 'audio/webm' },
+        { src: this.getAssetUrl('audio/oohale-instrumental.webm'), type: 'audio/webm' },
+        { src: this.getAssetUrl('audio/jaanu-oohale-instrumental.m4a'), type: 'audio/mp4' },
+        { src: this.getAssetUrl('audio/oohale-instrumental.m4a'), type: 'audio/mp4' },
+      ];
+
+      candidateSources.forEach(({ src, type }) => {
+        const sourceEl = document.createElement('source');
+        sourceEl.src = src;
+        sourceEl.type = type;
+        audio.appendChild(sourceEl);
+      });
+
+      // Seamless looping guarantee:
+      // Even if browser audio buffers drop loop flag, restart immediately on 'ended'
+      audio.addEventListener('ended', () => {
+        if (this.bgAudio && this.isPlaying) {
+          this.bgAudio.currentTime = 0;
+          const restartPromise = this.bgAudio.play();
+          if (restartPromise) {
+            restartPromise.catch(() => {
+              // Graceful catch
+            });
+          }
+        }
+      });
+
+      // Handle file loading errors gracefully
+      audio.addEventListener('error', () => {
+        // If external audio file fails to load, gracefully switch to procedural ambient synth
+        if (!this.isPlaying) {
+          this.useFallbackSynth = true;
+          this.startFallbackSynth();
+        }
+      });
+
+      this.bgAudio = audio;
+    } catch {
+      // In case DOM audio creation fails, fallback to procedural audio
+      this.useFallbackSynth = true;
     }
-    if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
   }
 
-  private playPianoNote(freq: number, startTime: number, duration: number = 3.8, velocity: number = 0.22) {
-    if (!this.ctx || !this.masterGain) return;
+  /**
+   * Listen for tab visibility changes so background audio resumes smoothly if paused by OS.
+   */
+  private setupVisibilityListener() {
+    if (typeof document === 'undefined') return;
 
-    const filter = this.ctx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(1350, startTime);
-    filter.frequency.exponentialRampToValueAtTime(320, startTime + duration);
-
-    const noteGain = this.ctx.createGain();
-    noteGain.gain.setValueAtTime(0.0001, startTime);
-    noteGain.gain.linearRampToValueAtTime(velocity, startTime + 0.045);
-    noteGain.gain.exponentialRampToValueAtTime(velocity * 0.45, startTime + 0.9);
-    noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
-
-    const osc1 = this.ctx.createOscillator();
-    osc1.type = 'sine';
-    osc1.frequency.setValueAtTime(freq, startTime);
-
-    const osc2 = this.ctx.createOscillator();
-    osc2.type = 'triangle';
-    osc2.frequency.setValueAtTime(freq * 2, startTime);
-    const osc2Gain = this.ctx.createGain();
-    osc2Gain.gain.setValueAtTime(0.2, startTime);
-
-    const osc3 = this.ctx.createOscillator();
-    osc3.type = 'sine';
-    osc3.frequency.setValueAtTime(freq * 1.0025, startTime);
-    const osc3Gain = this.ctx.createGain();
-    osc3Gain.gain.setValueAtTime(0.12, startTime);
-
-    osc1.connect(filter);
-    osc2.connect(osc2Gain);
-    osc2Gain.connect(filter);
-    osc3.connect(osc3Gain);
-    osc3Gain.connect(filter);
-    filter.connect(noteGain);
-    noteGain.connect(this.masterGain);
-
-    osc1.start(startTime);
-    osc2.start(startTime);
-    osc3.start(startTime);
-    osc1.stop(startTime + duration);
-    osc2.stop(startTime + duration);
-    osc3.stop(startTime + duration);
-  }
-
-  private playGuitarPluck(freq: number, startTime: number, velocity: number = 0.14) {
-    if (!this.ctx || !this.masterGain) return;
-
-    const pluckFilter = this.ctx.createBiquadFilter();
-    pluckFilter.type = 'bandpass';
-    pluckFilter.frequency.setValueAtTime(freq * 1.8, startTime);
-    pluckFilter.Q.setValueAtTime(2.5, startTime);
-
-    const pluckGain = this.ctx.createGain();
-    pluckGain.gain.setValueAtTime(0.0001, startTime);
-    pluckGain.gain.linearRampToValueAtTime(velocity, startTime + 0.015);
-    pluckGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 2.4);
-
-    const osc = this.ctx.createOscillator();
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(freq, startTime);
-
-    osc.connect(pluckFilter);
-    pluckFilter.connect(pluckGain);
-    pluckGain.connect(this.masterGain);
-
-    osc.start(startTime);
-    osc.stop(startTime + 2.5);
-  }
-
-  private playWarmPad(freq: number, startTime: number, duration: number = 4.5) {
-    if (!this.ctx || !this.masterGain) return;
-
-    const padFilter = this.ctx.createBiquadFilter();
-    padFilter.type = 'lowpass';
-    padFilter.frequency.setValueAtTime(320, startTime);
-    padFilter.frequency.linearRampToValueAtTime(450, startTime + duration * 0.5);
-    padFilter.frequency.linearRampToValueAtTime(260, startTime + duration);
-
-    const padGain = this.ctx.createGain();
-    padGain.gain.setValueAtTime(0.0001, startTime);
-    padGain.gain.linearRampToValueAtTime(0.08, startTime + 1.2);
-    padGain.gain.linearRampToValueAtTime(0.0001, startTime + duration);
-
-    const padOsc = this.ctx.createOscillator();
-    padOsc.type = 'sine';
-    padOsc.frequency.setValueAtTime(freq, startTime);
-
-    padOsc.connect(padFilter);
-    padFilter.connect(padGain);
-    padGain.connect(this.masterGain);
-
-    padOsc.start(startTime);
-    padOsc.stop(startTime + duration);
-  }
-
-  private playChordCycle() {
-    if (!this.ctx || !this.isPlaying) return;
-
-    const currentChord = this.romanticChords[this.chordIndex];
-    const now = this.ctx.currentTime;
-
-    this.playWarmPad(currentChord.root, now, 4.5);
-
-    currentChord.notes.forEach((freq, idx) => {
-      const noteDelay = idx * 0.22 + (Math.random() * 0.04);
-      const vel = 0.17 + (Math.random() * 0.04);
-      this.playPianoNote(freq, now + noteDelay, 4.2, vel);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && this.isPlaying && this.bgAudio && this.bgAudio.paused) {
+        this.bgAudio.play().catch(() => {
+          // Handled gracefully
+        });
+      }
     });
-
-    currentChord.guitar.forEach((freq, idx) => {
-      const guitarDelay = 0.6 + idx * 0.35 + (Math.random() * 0.06);
-      this.playGuitarPluck(freq, now + guitarDelay, 0.11);
-    });
-
-    if (Math.random() > 0.25) {
-      const melodyFreq = this.romanticMelodyNotes[Math.floor(Math.random() * this.romanticMelodyNotes.length)];
-      this.playPianoNote(melodyFreq, now + 1.6 + Math.random() * 0.6, 3.2, 0.11);
-    }
-
-    if (Math.random() > 0.45) {
-      const melodyFreq2 = this.romanticMelodyNotes[Math.floor(Math.random() * this.romanticMelodyNotes.length)];
-      this.playPianoNote(melodyFreq2, now + 2.7 + Math.random() * 0.5, 3.0, 0.09);
-    }
-
-    this.chordIndex = (this.chordIndex + 1) % this.romanticChords.length;
   }
 
+  /**
+   * Sets up one-time user interaction listeners to satisfy browser autoplay policies.
+   * If autoplay is blocked on initial launch, the user's first legitimate interaction
+   * (tap, click, keydown) immediately starts the music without requiring any music UI.
+   */
+  private setupInteractionListeners() {
+    if (this.interactionListenersArmed || typeof window === 'undefined') return;
+    this.interactionListenersArmed = true;
+
+    const userEvents = ['pointerdown', 'touchstart', 'click', 'keydown'];
+
+    const handleFirstInteraction = () => {
+      userEvents.forEach((event) => {
+        window.removeEventListener(event, handleFirstInteraction, true);
+        document.removeEventListener(event, handleFirstInteraction, true);
+      });
+      this.interactionListenersArmed = false;
+
+      // Resume or play the background audio
+      this.playAudioInstance();
+    };
+
+    userEvents.forEach((event) => {
+      window.addEventListener(event, handleFirstInteraction, { capture: true, once: true, passive: true });
+      document.addEventListener(event, handleFirstInteraction, { capture: true, once: true, passive: true });
+    });
+  }
+
+  /**
+   * Internal helper to start playing the HTML5 audio instance.
+   */
+  private playAudioInstance(): Promise<void> {
+    if (!this.bgAudio) {
+      this.initBackgroundAudio();
+    }
+
+    if (!this.bgAudio) {
+      this.startFallbackSynth();
+      return Promise.resolve();
+    }
+
+    const promise = this.bgAudio.play();
+    if (promise !== undefined) {
+      return promise
+        .then(() => {
+          this.isPlaying = true;
+        })
+        .catch(() => {
+          // Autoplay blocked by browser policy: arm interaction listeners
+          this.isPlaying = false;
+          this.setupInteractionListeners();
+        });
+    }
+
+    return Promise.resolve();
+  }
+
+  /**
+   * Starts background music playback.
+   * Called on initial page launch and continues seamlessly across all scenes.
+   * Safe to call multiple times: will never restart music if it is already playing.
+   */
   public start() {
-    this.initContext();
     if (this.isPlaying) return;
 
-    this.isPlaying = true;
-    this.playChordCycle();
+    if (this.useFallbackSynth) {
+      this.startFallbackSynth();
+      return;
+    }
 
-    this.intervalId = window.setInterval(() => {
-      this.playChordCycle();
-    }, 4400);
+    this.playAudioInstance().catch(() => {
+      this.setupInteractionListeners();
+    });
   }
 
+  /**
+   * Alias for start to maintain clear semantics.
+   */
+  public startBackgroundMusic() {
+    this.start();
+  }
+
+  /**
+   * Pauses playback if needed.
+   */
   public pause() {
     this.isPlaying = false;
-    if (this.intervalId !== null) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
+    if (this.bgAudio) {
+      this.bgAudio.pause();
+    }
+    if (this.fallbackIntervalId !== null) {
+      clearInterval(this.fallbackIntervalId);
+      this.fallbackIntervalId = null;
     }
   }
 
+  /**
+   * Toggle playback state (legacy support).
+   */
   public togglePlay(): boolean {
     if (this.isPlaying) {
       this.pause();
@@ -207,65 +240,88 @@ class AudioEngine {
     return this.isPlaying;
   }
 
-  public toggleMute(): boolean {
-    this.isMuted = !this.isMuted;
-    sessionStorage.setItem('isha_bday_muted', String(this.isMuted));
-    if (this.masterGain && this.ctx) {
-      const target = this.isMuted ? 0 : this.volume;
-      this.masterGain.gain.setTargetAtTime(target, this.ctx.currentTime, 0.1);
-    }
-    return this.isMuted;
-  }
-
+  /**
+   * Sets music volume between 0 and 1.
+   */
   public setVolume(vol: number) {
     this.volume = Math.max(0, Math.min(1, vol));
-    sessionStorage.setItem('isha_bday_volume', String(this.volume));
-    if (this.masterGain && this.ctx && !this.isMuted) {
-      this.masterGain.gain.setTargetAtTime(this.volume, this.ctx.currentTime, 0.05);
+    if (this.bgAudio) {
+      this.bgAudio.volume = this.volume;
+    }
+    if (this.sfxGain && this.sfxCtx) {
+      this.sfxGain.gain.setValueAtTime(this.volume, this.sfxCtx.currentTime);
     }
   }
 
-  // Interactive Sound: Blowing out candles (gentle breath puff + starlight sparkle)
+  public getIsPlaying(): boolean {
+    return this.isPlaying;
+  }
+
+  public getVolume(): number {
+    return this.volume;
+  }
+
+  // =========================================================================
+  // Web Audio Context & Interactive Sound Effects (Candles, Gifts, Chocolates)
+  // Plays smoothly on top of background music without restarting or interrupting it.
+  // =========================================================================
+
+  private initSfxContext() {
+    if (!this.sfxCtx && typeof window !== 'undefined') {
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      this.sfxCtx = new AudioCtx();
+      this.sfxGain = this.sfxCtx.createGain();
+      this.sfxGain.gain.setValueAtTime(this.volume, this.sfxCtx.currentTime);
+      this.sfxGain.connect(this.sfxCtx.destination);
+    }
+    if (this.sfxCtx && this.sfxCtx.state === 'suspended') {
+      this.sfxCtx.resume().catch(() => {});
+    }
+  }
+
+  /**
+   * Interactive Sound: Blowing out birthday candles (gentle breath puff + celestial chimes)
+   */
   public playCandleBlow() {
     try {
-      this.initContext();
-      if (!this.ctx || !this.masterGain || this.isMuted) return;
+      this.initSfxContext();
+      if (!this.sfxCtx || !this.sfxGain) return;
 
-      const now = this.ctx.currentTime;
+      const now = this.sfxCtx.currentTime;
 
-      // Soft breath / whoosh using lowpass-filtered noise
-      const bufferSize = this.ctx.sampleRate * 0.8;
-      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+      // Soft breath / whoosh using lowpass-filtered white noise
+      const bufferSize = this.sfxCtx.sampleRate * 0.8;
+      const buffer = this.sfxCtx.createBuffer(1, bufferSize, this.sfxCtx.sampleRate);
       const data = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) {
         data[i] = Math.random() * 2 - 1;
       }
 
-      const noise = this.ctx.createBufferSource();
+      const noise = this.sfxCtx.createBufferSource();
       noise.buffer = buffer;
 
-      const noiseFilter = this.ctx.createBiquadFilter();
+      const noiseFilter = this.sfxCtx.createBiquadFilter();
       noiseFilter.type = 'lowpass';
       noiseFilter.frequency.setValueAtTime(450, now);
       noiseFilter.frequency.exponentialRampToValueAtTime(150, now + 0.7);
 
-      const noiseGain = this.ctx.createGain();
+      const noiseGain = this.sfxCtx.createGain();
       noiseGain.gain.setValueAtTime(0.001, now);
       noiseGain.gain.linearRampToValueAtTime(0.12, now + 0.15);
       noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.75);
 
       noise.connect(noiseFilter);
       noiseFilter.connect(noiseGain);
-      noiseGain.connect(this.masterGain);
+      noiseGain.connect(this.sfxGain);
 
       noise.start(now);
       noise.stop(now + 0.8);
 
-      // Celestial chime celebration right after the candles go out
-      const sparkleNotes = [659.25, 739.99, 880.00, 1108.73, 1318.51]; // E5, F#5, A5, C#6, E6
+      // Celestial sparkle chimes celebrating candle blow-out
+      const sparkleNotes = [659.25, 739.99, 880.00, 1108.73, 1318.51];
       sparkleNotes.forEach((freq, idx) => {
-        const osc = this.ctx!.createOscillator();
-        const gain = this.ctx!.createGain();
+        const osc = this.sfxCtx!.createOscillator();
+        const gain = this.sfxCtx!.createGain();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, now + 0.4 + idx * 0.09);
 
@@ -274,7 +330,7 @@ class AudioEngine {
         gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4 + idx * 0.09 + 1.2);
 
         osc.connect(gain);
-        gain.connect(this.masterGain!);
+        gain.connect(this.sfxGain!);
 
         osc.start(now + 0.4 + idx * 0.09);
         osc.stop(now + 0.4 + idx * 0.09 + 1.3);
@@ -284,18 +340,20 @@ class AudioEngine {
     }
   }
 
-  // Interactive Sound: Opening a gift box
+  /**
+   * Interactive Sound: Opening a birthday gift box
+   */
   public playGiftOpen() {
     try {
-      this.initContext();
-      if (!this.ctx || !this.masterGain || this.isMuted) return;
+      this.initSfxContext();
+      if (!this.sfxCtx || !this.sfxGain) return;
 
-      const now = this.ctx.currentTime;
-      const notes = [554.37, 659.25, 880.00, 1108.73]; // C#5, E5, A5, C#6
+      const now = this.sfxCtx.currentTime;
+      const notes = [554.37, 659.25, 880.00, 1108.73];
 
       notes.forEach((freq, i) => {
-        const osc = this.ctx!.createOscillator();
-        const gain = this.ctx!.createGain();
+        const osc = this.sfxCtx!.createOscillator();
+        const gain = this.sfxCtx!.createGain();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, now + i * 0.07);
 
@@ -304,7 +362,7 @@ class AudioEngine {
         gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.07 + 1.1);
 
         osc.connect(gain);
-        gain.connect(this.masterGain!);
+        gain.connect(this.sfxGain!);
 
         osc.start(now + i * 0.07);
         osc.stop(now + i * 0.07 + 1.2);
@@ -314,18 +372,20 @@ class AudioEngine {
     }
   }
 
-  // Interactive Sound: Chocolate pick treat
+  /**
+   * Interactive Sound: Chocolate pick treat
+   */
   public playChocolatePick() {
     try {
-      this.initContext();
-      if (!this.ctx || !this.masterGain || this.isMuted) return;
+      this.initSfxContext();
+      if (!this.sfxCtx || !this.sfxGain) return;
 
-      const now = this.ctx.currentTime;
+      const now = this.sfxCtx.currentTime;
       const notes = [659.25, 880.00];
 
       notes.forEach((freq, i) => {
-        const osc = this.ctx!.createOscillator();
-        const gain = this.ctx!.createGain();
+        const osc = this.sfxCtx!.createOscillator();
+        const gain = this.sfxCtx!.createGain();
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(freq, now + i * 0.06);
 
@@ -334,7 +394,7 @@ class AudioEngine {
         gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.06 + 0.8);
 
         osc.connect(gain);
-        gain.connect(this.masterGain!);
+        gain.connect(this.sfxGain!);
 
         osc.start(now + i * 0.06);
         osc.stop(now + i * 0.06 + 0.9);
@@ -344,7 +404,6 @@ class AudioEngine {
     }
   }
 
-  // Legacy aliases for full backward compatibility
   public playEnvelopeOpen() {
     this.playGiftOpen();
   }
@@ -353,16 +412,47 @@ class AudioEngine {
     this.playGiftOpen();
   }
 
-  public getIsPlaying(): boolean {
-    return this.isPlaying;
+  // =========================================================================
+  // Procedural Web Audio Synth Fallback
+  // Only engaged if audio files are completely inaccessible or blocked.
+  // =========================================================================
+
+  private startFallbackSynth() {
+    this.initSfxContext();
+    if (!this.sfxCtx || this.isPlaying) return;
+
+    this.isPlaying = true;
+    this.playFallbackChordCycle();
+
+    this.fallbackIntervalId = window.setInterval(() => {
+      this.playFallbackChordCycle();
+    }, 4400);
   }
 
-  public getIsMuted(): boolean {
-    return this.isMuted;
-  }
+  private playFallbackChordCycle() {
+    if (!this.sfxCtx || !this.isPlaying || !this.sfxGain) return;
 
-  public getVolume(): number {
-    return this.volume;
+    const currentChord = this.romanticChords[this.fallbackChordIndex];
+    const now = this.sfxCtx.currentTime;
+
+    currentChord.notes.forEach((freq, idx) => {
+      const osc = this.sfxCtx!.createOscillator();
+      const gain = this.sfxCtx!.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(0.04, now + idx * 0.2 + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.8);
+
+      osc.connect(gain);
+      gain.connect(this.sfxGain!);
+
+      osc.start(now + idx * 0.2);
+      osc.stop(now + 4.0);
+    });
+
+    this.fallbackChordIndex = (this.fallbackChordIndex + 1) % this.romanticChords.length;
   }
 }
 

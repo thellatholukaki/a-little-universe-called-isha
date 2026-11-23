@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { CelebrationStage } from './types';
 import { PetalCanvas } from './components/Background/PetalCanvas';
-import { AudioPlayer } from './components/AudioPlayer/AudioPlayer';
+import { audioEngine } from './services/audioEngine';
 import { WelcomeSurprise } from './components/Celebration/WelcomeSurprise';
 import { CakeCelebration } from './components/Celebration/CakeCelebration';
 import { ChocolateSurprises } from './components/Celebration/ChocolateSurprises';
@@ -14,12 +14,17 @@ import { GrandFinale } from './components/Celebration/GrandFinale';
 
 export const App: React.FC = () => {
   const [currentStage, setCurrentStage] = useState<CelebrationStage>('welcome');
-  const [hasStartedAudio, setHasStartedAudio] = useState<boolean>(false);
 
   const isNightStage = currentStage === 'finale';
 
+  // Automatically attempt background music playback as soon as the site launches
+  useEffect(() => {
+    audioEngine.start();
+  }, []);
+
   const handleStartCelebration = () => {
-    setHasStartedAudio(true);
+    // Ensures audio is active on the first user interaction
+    audioEngine.start();
     setCurrentStage('cake');
   };
 
@@ -41,7 +46,7 @@ export const App: React.FC = () => {
         showRainbow={currentStage !== 'finale'} 
       />
 
-      {/* Floating Header */}
+      {/* Floating Header - Clean title with no music or toggle buttons */}
       <header className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between px-4 sm:px-8 py-3.5 pointer-events-none">
         {/* Title */}
         <div className="pointer-events-auto flex items-center gap-2">
@@ -53,11 +58,6 @@ export const App: React.FC = () => {
           >
             A Little Universe Called Isha
           </span>
-        </div>
-
-        {/* Music Player Control */}
-        <div className="pointer-events-auto">
-          <AudioPlayer hasStartedAudio={hasStartedAudio} />
         </div>
       </header>
 
