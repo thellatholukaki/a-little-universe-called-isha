@@ -106,7 +106,7 @@ export const WelcomeSurprise: React.FC<WelcomeSurpriseProps> = ({ onStartCelebra
           </div>
 
           <h1 className="font-serif text-3xl sm:text-5xl text-midnight font-normal tracking-tight leading-tight">
-            A Little Universe, Made Just for You, My Bangaram.
+            A Little Universe, Created Just for You, Bangaram.
           </h1>
           <p className="font-handwriting text-xl sm:text-2xl text-dustyRose-dark font-semibold mt-1">
             Welcome to your special birthday sanctuary ❤️
@@ -183,7 +183,7 @@ export const WelcomeSurprise: React.FC<WelcomeSurpriseProps> = ({ onStartCelebra
               className="relative z-30 flex flex-col items-center justify-center text-ivory px-4 text-center"
             >
               <span className="font-serif italic text-xl sm:text-2xl font-semibold text-[#FFE085]">
-                Happy 23rd, My Bangaram!
+                Happy 23rd, Bangaram!
               </span>
               <p className="text-xs font-sans tracking-widest uppercase text-ivory/95 mt-1 font-medium">
                 Your Little Universe Begins ✨

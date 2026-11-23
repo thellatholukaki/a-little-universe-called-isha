@@ -56,7 +56,7 @@ export const App: React.FC = () => {
               isNightStage ? 'text-ivory/85' : 'text-midnight/85'
             }`}
           >
-            A Little Universe Called My Bangaram
+            A Little Universe Called Bangaram
           </span>
         </div>
       </header>

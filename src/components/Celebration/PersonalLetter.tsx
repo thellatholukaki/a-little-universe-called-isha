@@ -10,7 +10,7 @@ interface PersonalLetterProps {
 const LETTER_BLOCKS = [
   {
     type: 'greeting',
-    text: 'Dear My Bangaram,'
+    text: 'Dear Bangaram,'
   },
   {
     type: 'birthday-warmth',
@@ -46,7 +46,7 @@ const LETTER_BLOCKS = [
   },
   {
     type: 'signature',
-    text: "Happy 23rd Birthday once again, My Bangaram.\nWith warm thoughts and genuine appreciation."
+    text: "Happy 23rd Birthday once again, Bangaram.\nWith warm thoughts and genuine appreciation."
   }
 ];
 
@@ -130,7 +130,7 @@ export const PersonalLetter: React.FC<PersonalLetterProps> = ({ onContinueToFina
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-champagne/80 border border-dustyRose/30 text-xs font-sans tracking-widest uppercase text-midnight/80 mb-1">
             <Feather className="w-3.5 h-3.5 text-dustyRose-dark" />
-            <span>A Letter Written Just for My Bangaram</span>
+            <span>A Little Letter for Bangaram</span>
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl text-midnight font-normal">
@@ -176,7 +176,7 @@ export const PersonalLetter: React.FC<PersonalLetterProps> = ({ onContinueToFina
                   Tap the seal to open your letter
                 </p>
                 <p className="text-[11px] font-sans text-graphite/70 mt-1">
-                  Handwritten exclusively for My Bangaram
+                  Handwritten with care for Bangaram
                 </p>
               </div>
             </motion.div>
@@ -234,7 +234,7 @@ export const PersonalLetter: React.FC<PersonalLetterProps> = ({ onContinueToFina
                             {block.text}
                           </p>
                           <span className="font-serif italic text-xs text-graphite mt-1">
-                            A Little Universe Called My Bangaram • 24 November 2026
+                            A Little Universe Called Bangaram • 24 November 2026
                           </span>
                         </div>
                       ) : (

@@ -106,7 +106,7 @@ export const Scene1Envelope: React.FC<Scene1EnvelopeProps> = ({ onOpen }) => {
             >
               <div className="w-8 h-px bg-dustyRose/60 mb-2" />
               <p className="font-handwriting text-2xl sm:text-3xl text-midnight font-bold">
-                For My Bangaram
+                For Bangaram
               </p>
               <p className="font-serif italic text-xs text-dustyRose-dark mt-1">
                 24 November 2026

@@ -82,7 +82,7 @@ export const Scene2BirthdayReveal: React.FC<Scene2BirthdayRevealProps> = ({ onNe
           Happy 23<sup className="text-xl sm:text-2xl md:text-3xl normal-case">rd</sup> Birthday,
           <br />
           <span className="font-serif italic font-medium text-dustyRose-dark">
-            My Bangaram
+            Bangaram
           </span>
         </motion.h1>
 

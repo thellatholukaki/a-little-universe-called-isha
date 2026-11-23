@@ -52,7 +52,7 @@ export const CakeCelebration: React.FC<CakeCelebrationProps> = ({ onContinueToCh
             Before we open all your surprises, there's one important thing...
           </h2>
           <p className="font-handwriting text-2xl sm:text-3xl text-dustyRose-dark font-bold mt-1">
-            Make a wish, My Bangaram!
+            Make a wish, Bangaram!
           </p>
         </motion.div>
 
@@ -136,7 +136,7 @@ export const CakeCelebration: React.FC<CakeCelebrationProps> = ({ onContinueToCh
             </div>
             {/* Floral accents */}
             <span className="text-xs text-[#BA2D44] font-serif italic pt-3">
-              ❀ Made for My Bangaram ❀
+              ❀ Made for Bangaram ❀
             </span>
           </div>
 
@@ -199,7 +199,7 @@ export const CakeCelebration: React.FC<CakeCelebrationProps> = ({ onContinueToCh
                 </div>
 
                 <h3 className="font-serif text-2xl sm:text-3xl text-midnight font-normal tracking-wide">
-                  23 looks beautiful on you, My Bangaram.
+                  23 looks beautiful on you, Bangaram.
                 </h3>
 
                 <p className="font-serif text-base sm:text-lg text-midnight/90 leading-relaxed italic">
@@ -207,7 +207,7 @@ export const CakeCelebration: React.FC<CakeCelebrationProps> = ({ onContinueToCh
                 </p>
 
                 <p className="font-handwriting text-xl sm:text-2xl text-dustyRose-dark font-bold pt-1">
-                  Happy 23rd Birthday, My Bangaram! May this chapter be your most joyful one yet.
+                  Happy 23rd Birthday, Bangaram! May this chapter be your most joyful one yet.
                 </p>
               </div>
 
